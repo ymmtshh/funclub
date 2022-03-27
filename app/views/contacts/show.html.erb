@@ -1,0 +1,30 @@
+<p>お問い合わせ詳細</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td class="text-center" style="width: 30%;">氏名（カナ）</td>
+      <td><%= @contact.name %></td>
+    </tr>
+    <tr>
+      <td class="text-center">メールアドレス</td>
+      <td style="white-space: pre-wrap;"><%= @contact.email %></td>
+    </tr>
+    <tr>
+      <td class="text-center">電話番号</td>
+      <td style="white-space: pre-wrap;"><%= @contact.phone_number %></td>
+    </tr>
+    <tr>
+      <td class="text-center">お問い合わせ内容</td>
+      <td style="white-space: pre-wrap;"><%= @contact.subject_i18n %></td>
+    </tr>
+    <tr>
+      <td class="text-center">本文</td>
+      <td style="white-space: pre-wrap;"><%= @contact.message %></td>
+    </tr>
+  </tbody>
+</table>
+
+  <%= link_to "削除", contact_path, method: :delete, data: {confirm: "削除しますか？"} %>
+<%= link_to "一覧へ戻る", contacts_user_path(@contact.user_id) %>
+

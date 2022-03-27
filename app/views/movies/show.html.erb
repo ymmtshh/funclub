@@ -1,0 +1,19 @@
+<p>MOVIE詳細</p>
+
+タイトル<br>
+<%= @movie.title%><br>
+詳細<br>
+<%=simple_format @movie.body%><br>
+
+<% if @movie.video? %>
+<div class="video-player">
+    <%= video_tag @movie.video.url, autoplay: false, muted: false, controls: true , :size => "854x480"%>
+</div>
+<% end %>
+
+<%= link_to "一覧へ戻る", movies_user_path(@movie.user_id) %>
+
+<% if @movie.user_id == current_user.id %>
+  <%= link_to "編集", edit_movie_path %>
+  <%= link_to "削除", movie_path, method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>

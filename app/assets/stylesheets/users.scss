@@ -1,0 +1,28 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// li {
+//   width: 100px;
+//   height: 50px;
+//   text-align: center;
+//   line-height: 50px;
+//   margin-right: 8px;
+// }
+
+.profile-links {
+  list-style: none;
+  padding-right: 40px;
+  .profile-link {
+    font-size: 50px;
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    .fa-twitter{color:#303030;}
+    .fa-instagram{color:#303030;}
+    .fa-youtube{color:#303030;}
+    .fa-line{color:#303030;}
+    .fa-music{color:#303030;}
+    .fa-spotify{color:#303030;}
+  }
+}

@@ -1,0 +1,11 @@
+<%= @user.profile.name %>さんの動画一覧<br>
+<% @user.movies.each do |movie| %>
+  <%= link_to movie_path(movie) do %>
+  <%= movie.title %><br>
+  <% end %>
+<% end %>
+
+
+<% if @user.id == current_user.id %>
+  <%= link_to "新規作成", new_movie_path %>
+<% end %>

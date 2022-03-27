@@ -1,0 +1,43 @@
+<table>
+  <tbody>
+    <tr>
+      <td class="text-center" style="width: 30%;">氏名（カナ）</td>
+      <td><%= @contact.name %></td>
+    </tr>
+    <tr>
+      <td class="text-center">メールアドレス</td>
+      <td style="white-space: pre-wrap;"><%= @contact.email %></td>
+    </tr>
+    <tr>
+      <td class="text-center">電話番号</td>
+      <td style="white-space: pre-wrap;"><%= @contact.phone_number %></td>
+    </tr>
+    <tr>
+      <td class="text-center">お問い合わせ内容</td>
+      <td style="white-space: pre-wrap;"><%= @contact.subject_i18n %></td>
+    </tr>
+    <tr>
+      <td class="text-center">本文</td>
+      <td style="white-space: pre-wrap;"><%= @contact.message %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= form_for(@contact) do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :phone_number %>
+  <%= f.hidden_field :subject %>
+  <%= f.hidden_field :message %>
+  <div><%= f.submit '送信' %></div>
+<% end %>
+<%= form_for @contact, url: user_back_path do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :phone_number %>
+  <%= f.hidden_field :subject %>
+  <%= f.hidden_field :message %>
+  <div><%= f.submit '入力画面に戻る' %></div>
+<% end %>

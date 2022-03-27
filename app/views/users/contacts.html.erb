@@ -1,0 +1,8 @@
+<% if @user.id == current_user.id %>
+  <%= @user.profile.name %>さんのお問い合わせ一覧<br>
+    <% @user.contacts.each do |contact| %>
+      <%= link_to contact_path(contact) do %>
+      <%= contact.subject_i18n %><br>
+      <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,24 @@
+<p>DISCOGRAPHY詳細</p>
+<% if @disc.image? %>
+    ジャケット<br>
+    <%= image_tag @disc.image.to_s %>
+<% end %>
+
+タイトル<br>
+<%= @disc.title%><br>
+
+リリース日<br>
+<%=simple_format @disc.release%><br>
+
+価格<br>
+<%=simple_format @disc.price%><br>
+
+詳細<br>
+<%=simple_format @disc.body%><br>
+
+<%= link_to "一覧へ戻る", discs_user_path(@disc.user_id) %>
+
+<% if @disc.user_id == current_user.id %>
+  <%= link_to "編集", edit_disc_path %>
+  <%= link_to "削除", disc_path, method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>

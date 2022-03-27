@@ -1,0 +1,32 @@
+<div class="card col-sm-10 mx-auto mt-5 px-0">
+  <div class="card-header bg-white">
+    <h2>アカウント情報</h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-8">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>ユーザID:</td>
+              <td><%= current_user.username %></td>
+              <td><%= link_to "編集", edit_account_username_path %></td>
+            </tr>
+            <tr>
+              <td>メールアドレス:</td>
+              <td><%= current_user.email %></td>
+              <td><%= link_to "編集", edit_account_email_path %></td>
+            </tr>
+            <tr>
+              <td>パスワード:</td>
+              <td>******</td>
+              <td><%= link_to "編集", edit_account_password_path %></td>
+            </tr>
+          </tbody>
+        </table>
+      <%= link_to '戻る' , "/users/#{current_user.id}", :class => "btn btn-light" %>
+      <%= link_to '退会する' , unsubscribe_user_path(current_user.id) %>
+      </div>
+    </div>
+  </div>
+</div>

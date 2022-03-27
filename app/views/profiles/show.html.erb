@@ -1,0 +1,13 @@
+<div class="d-flex flex-column">
+  <!-- アバターファイルの表示 -->
+  <%= image_tag @profile.avatar.to_s, :class => "float-center border mb-2 mx-auto" %>
+</div>
+
+<div>自己紹介:</div>
+<div><%= @profile.introduction %></div>
+
+<div>場所:</div>
+<div><%= @profile.location %></div>
+
+<div>web:</div>
+<div><%= @profile.web %></div>

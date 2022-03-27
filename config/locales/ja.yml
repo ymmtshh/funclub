@@ -1,0 +1,10 @@
+ja:
+  enums: 
+    contact: # モデル名
+      subject: # カラム名
+        prompt: '---' # enumの値
+        work: 'お仕事の依頼について' # enumの値
+        schedule: 'ライブの詳細について' # enumの値
+        music: '楽曲について' # enumの値
+        goods: 'グッズについて' # enumの値
+        other: 'その他' # enumの値

@@ -1,0 +1,17 @@
+<p>スケジュール詳細</p>
+
+イベントタイトル<br>
+<%= @schedule.title%><br>
+イベント詳細<br>
+<%=simple_format @schedule.body%><br>
+
+<% if @schedule.image? %>
+    <%= image_tag @schedule.image.to_s %>
+<% end %>
+
+<%= link_to "一覧へ戻る", schedules_user_path(@schedule.user_id) %>
+
+<% if @schedule.user_id == current_user.id %>
+  <%= link_to "編集", edit_schedule_path %>
+  <%= link_to "削除", schedule_path, method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %>
