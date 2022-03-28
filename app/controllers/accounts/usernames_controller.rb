@@ -12,6 +12,10 @@ class Accounts::UsernamesController < ApplicationController
         end
     end
 
+    # def password_required?
+    #     super && provider.blank?  # provider属性に値があればパスワード入力免除
+    # end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
         params.require(:user).permit(:username, :current_password)

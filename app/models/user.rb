@@ -2,14 +2,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :timeoutable, :trackable,
+          :recoverable, :rememberable, :validatable, :lockable, :timeoutable, :trackable,
           :omniauthable, omniauth_providers:[:twitter],
           :authentication_keys => [:login]
+          # :confirmable,
 
-  validates :username,
-            uniqueness: { case_sensitive: :false },
-            length: { minimum: 4, maximum: 20 },
-            format: { with: /\A[a-z0-9]+\z/, message: "ユーザー名は半角英数字です"}
+  # validates :username,
+  #           uniqueness: { case_sensitive: :false },
+  #           length: { minimum: 4, maximum: 20 },
+  #           format: { with: /\A[a-z0-9]+\z/, message: "ユーザー名は半角英数字です"}
 
   attr_writer :login
   def login
@@ -30,25 +31,6 @@ class User < ApplicationRecord
     super && (is_deleted == false)
   end
 
-    # Twitter認証ログイン用
-  # ユーザーの情報があれば探し、無ければ作成する
-  def self.find_for_oauth(auth)
-    user = User.find_by(uid: auth.uid, provider: auth.provider)
-
-    user ||= User.create!(
-      uid: auth.uid,
-      provider: auth.provider,
-      username: auth[:info][:name],
-      email: User.dummy_email(auth),
-      password: Devise.friendly_token[0, 20]
-    )
-    user
-  end
-
-  # ダミーのメールアドレスを作成
-  def self.dummy_email(auth)
-    "#{Time.now.strftime('%Y%m%d%H%M%S').to_i}-#{auth.uid}-#{auth.provider}@example.com"
-  end
 
   has_one :profile, dependent: :destroy
   has_many :schedules, dependent: :destroy
@@ -72,5 +54,28 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
 
+    unless user
+      # user.skip_confirmation!
+      user = User.create(
+        provider: auth.provider,
+        uid:      auth.uid,
+        username: auth.uid,
+        email:    User.dummy_email(auth),
+        password: Devise.friendly_token[0, 20]
+      )
+      profile = Profile.create(
+        user_id: user.id,
+        name: user.username
+      )
+    end
+    user
+  end
+  
+  private
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
+  end
 end

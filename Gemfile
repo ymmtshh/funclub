@@ -62,3 +62,4 @@ gem 'pry-rails'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
