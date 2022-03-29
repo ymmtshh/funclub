@@ -5,13 +5,23 @@ Rails.application.routes.draw do
     resource :email, :only => [:edit, :update], module: "accounts"
     resource :password, :only => [:edit, :update], module: "accounts"
   end
+  
+  devise_for :users, controllers: {
+      sessions:      'users/sessions',
+      passwords:     'users/passwords',
+      registrations: 'users/registrations'
+    }
+    
+    devise_for :fans, controllers: {
+      sessions:      'fans/sessions',
+      passwords:     'fans/passwords',
+      registrations: 'fans/registrations'
+    }
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # , controllers: {
-  #   sessions:      'users/sessions',
-  #   passwords:     'users/passwords',
-  #   registrations: 'users/registrations'
-  # }
+    get '/auth/twitter/callback', to: 'omniauth_callbacks#twitter'
+    post '/auth/twitter/callback', to: 'omniauth_callbacks#twitter'
+    get '/auth/another/twitter/callback', to: 'another_callbacks#twitter'
+    post '/auth/another/twitter/callback', to: 'another_callbacks#twitter'
   
   resources :users do
     resource :relationships, only: [:create, :destroy]
