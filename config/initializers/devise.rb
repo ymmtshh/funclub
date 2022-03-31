@@ -311,6 +311,6 @@ Devise.setup do |config|
   
   # Twitter認証
 
-  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], info_fields:"nickname", callback_url: 'http://127.0.0.1:3000/users/auth/twitter/callback'
+  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], callback_url: 'http://127.0.0.1:3000/users/auth/twitter/callback'
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 end

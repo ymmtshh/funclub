@@ -61,13 +61,13 @@ class User < ApplicationRecord
       user = User.create(
         provider: auth.provider,
         uid:      auth.uid,
-        username: auth.uid,
+        username: auth.info.nickname,
         email:    User.dummy_email(auth),
         password: Devise.friendly_token[0, 20]
       )
       profile = Profile.create(
         user_id: user.id,
-        name: user.username
+        name: auth.info.name
       )
     end
     # user.skip_confirmation!
