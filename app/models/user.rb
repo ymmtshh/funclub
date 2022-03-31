@@ -58,7 +58,6 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
-      # user.skip_confirmation!
       user = User.create(
         provider: auth.provider,
         uid:      auth.uid,
@@ -71,6 +70,7 @@ class User < ApplicationRecord
         name: user.username
       )
     end
+    # user.skip_confirmation!
     user
   end
   

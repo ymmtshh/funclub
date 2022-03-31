@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     resource :password, :only => [:edit, :update], module: "accounts"
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # , controllers: {
-  #   sessions:      'users/sessions',
-  #   passwords:     'users/passwords',
-  #   registrations: 'users/registrations'
-  # }
+  devise_for :users, controllers: {
+    sessions:      'users/sessions',
+    passwords:     'users/passwords',
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   
   resources :users do
     resource :relationships, only: [:create, :destroy]
