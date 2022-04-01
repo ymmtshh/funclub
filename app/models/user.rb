@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable, :lockable, :timeoutable, :trackable,
-          :omniauthable, omniauth_providers:[:twitter],
+          :omniauthable, omniauth_providers:[:twitter, :google_oauth2],
           :authentication_keys => [:login]
           # :confirmable,
 
@@ -54,7 +54,7 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
-  def self.find_for_oauth(auth)
+  def self.find_for_oauth_twitter(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
@@ -67,7 +67,27 @@ class User < ApplicationRecord
       )
       profile = Profile.create(
         user_id: user.id,
-        name: auth.info.name
+        name: user.username
+      )
+    end
+    # user.skip_confirmation!
+    user
+  end
+
+  def self.find_for_oauth_google(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+
+    unless user
+      user = User.create(
+        provider: auth.provider,
+        uid:      auth.uid,
+        username: auth.info.name,
+        email:    auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
+      profile = Profile.create(
+        user_id: user.id,
+        name: user.username
       )
     end
     # user.skip_confirmation!
