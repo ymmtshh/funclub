@@ -40,7 +40,6 @@ class User < ApplicationRecord
   has_many :contacts, dependent: :destroy
   has_many :movies, dependent: :destroy
 
-
   # フォローする側から中間テーブルへのアソシエーション
   has_many :relationships, foreign_key: :following_id, dependent: :destroy
   # フォローする側からフォローされたユーザを取得する
@@ -54,9 +53,10 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
+
+  # SNS認証
   def self.find_for_oauth_twitter(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
-
     unless user
       user = User.create(
         provider: auth.provider,
@@ -76,7 +76,6 @@ class User < ApplicationRecord
 
   def self.find_for_oauth_google(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
-
     unless user
       user = User.create(
         provider: auth.provider,

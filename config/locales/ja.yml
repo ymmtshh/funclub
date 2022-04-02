@@ -1,5 +1,10 @@
 ja:
   enums: 
+    user:
+      role:
+        fan: 'ファン'
+        band: 'バンド'
+    
     contact: # モデル名
       subject: # カラム名
         prompt: '---' # enumの値
