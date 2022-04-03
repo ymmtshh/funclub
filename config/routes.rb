@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  # get 'after_omniauth_signup', to: 'registrations#new'
   
   resources :users do
     resource :relationships, only: [:create, :destroy]

@@ -7,10 +7,7 @@ class User < ApplicationRecord
           :authentication_keys => [:login]
           # :confirmable,
 
-  # validates :username,
-  #           uniqueness: { case_sensitive: :false },
-  #           length: { minimum: 4, maximum: 20 },
-  #           format: { with: /\A[a-z0-9]+\z/, message: "ユーザー名は半角英数字です"}
+  # validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
 
   attr_writer :login
   def login
@@ -30,6 +27,8 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
+
+  enum role: { fan: 0, band: 1 }
 
 
   has_one :profile, dependent: :destroy
@@ -55,46 +54,49 @@ class User < ApplicationRecord
 
 
   # SNS認証
-  def self.find_for_oauth_twitter(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-    unless user
-      user = User.create(
-        provider: auth.provider,
-        uid:      auth.uid,
-        username: auth.info.nickname,
-        email:    User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20]
-      )
-      profile = Profile.create(
-        user_id: user.id,
-        name: user.username
-      )
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.username = auth["info"]["nickname"] 
+          # OR auth["info"]["first_name"]
+      user.email = auth["info"]["email"]
     end
-    # user.skip_confirmation!
-    user
-  end
-
-  def self.find_for_oauth_google(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-    unless user
-      user = User.create(
-        provider: auth.provider,
-        uid:      auth.uid,
-        username: auth.info.name,
-        email:    auth.info.email,
-        password: Devise.friendly_token[0, 20]
-      )
-      profile = Profile.create(
-        user_id: user.id,
-        name: user.username
-      )
-    end
-    # user.skip_confirmation!
-    user
   end
   
-  private
-  def self.dummy_email(auth)
-    "#{auth.uid}-#{auth.provider}@example.com"
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+        user.password = Devise.friendly_token[0, 20]
+      end
+    else
+      super
+    end
   end
+
+
+  # def self.find_for_oauth_google(auth)
+  #   user = User.where(uid: auth.uid, provider: auth.provider).first
+  #   unless user
+  #     user = User.create(
+  #       provider: auth.provider,
+  #       uid:      auth.uid,
+  #       username: auth.info.name,
+  #       email:    auth.info.email,
+  #       password: Devise.friendly_token[0, 20]
+  #     )
+  #     profile = Profile.create(
+  #       user_id: user.id,
+  #       name: user.username
+  #     )
+  #   end
+  #   # user.skip_confirmation!
+  #   user
+  # end
+  
+  # private
+  # def self.dummy_email(auth)
+  #   "#{auth.uid}-#{auth.provider}@example.com"
+  # end
 end

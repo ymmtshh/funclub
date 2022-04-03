@@ -28,11 +28,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super(scope)
   # end
   def twitter
-    callback_from_twitter
+    callback_from
   end
 
   def google_oauth2
-    callback_from_google
+    callback_from
   end
 
   def failure
@@ -40,29 +40,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
-  def callback_from_twitter
+  def callback_from
     provider = provider.to_s
-    @user = User.find_for_oauth_twitter(request.env['omniauth.auth'])
+    @user = User.from_omniauth(request.env["omniauth.auth"].except("extra"))
 
     if @user.persisted?
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-      sign_in_and_redirect @user, event: :authentication
+        sign_in_and_redirect @user, event: :authentication
     else
-      session["devise.twitter_data"] = request.env['omniauth.auth'].except("extra")
-      redirect_to new_user_registration_url
+        session["devise.user_attributes"] = @user.attributes
+        redirect_to new_user_registration_url
     end
   end
 
-  def callback_from_google
-    provider = provider.to_s
-    @user = User.find_for_oauth_google(request.env['omniauth.auth'])
+  # def callback_from_google
+  #   provider = provider.to_s
+  #   @user = User.find_for_oauth_google(request.env['omniauth.auth'])
 
-    if @user.persisted?
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-      sign_in_and_redirect @user, event: :authentication
-    else
-      session["devise.google_data"] = request.env['omniauth.auth'].except("extra")
-      redirect_to new_user_registration_url
-    end
-  end
+  #   if @user.persisted?
+  #     flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+  #     sign_in_and_redirect @user, event: :authentication
+  #   else
+  #     session["devise.google_data"] = request.env['omniauth.auth'].except("extra")
+  #     redirect_to new_user_registration_url
+  #   end
+  # end
 end
