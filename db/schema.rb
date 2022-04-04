@@ -71,17 +71,17 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.bigint "user_id", null: false
     t.string "name"
     t.text "introduction"
+    t.integer "location"
     t.text "web"
     t.string "avatar"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "location"
     t.string "twitter"
     t.string "instagram"
     t.string "youtube"
     t.string "line"
     t.string "apple"
     t.string "spotify"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "schedule_date"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -126,7 +127,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_deleted", default: false, null: false
-    t.integer "role", default: 0, null: false
+    t.boolean "band", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

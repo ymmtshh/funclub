@@ -31,16 +31,16 @@
     <%= link_to 'Googleアカウントで登録', user_google_oauth2_omniauth_authorize_path, method: :post %>
   <% end %>
   
-
-    <div class="form-check">
-      <%= f.label :role, "バンドアカウントを作成する場合はこちらをチェック", :class => "form-check-label" %>
-      <%= f.check_box :role, {}, "band", "fan" %>
+    <div class="form-group">
+      <%= f.label :band, "バンドアカウントを登録する", :class => "form-label" %><br />
+      <%= f.check_box :band, {}, "true", "false" %>
     </div>
+
+
     <div class="actions">
       <%= f.submit "アカウントを作成する", :class => "btn btn-primary btn-block" %>
     </div>
     <% end %>
-    
     <div class="mt-2">
       すでにアカウントをお持ちですか？<%= link_to "ログイン", new_user_session_path %>
     </div>

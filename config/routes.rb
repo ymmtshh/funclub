@@ -5,14 +5,13 @@ Rails.application.routes.draw do
     resource :email, :only => [:edit, :update], module: "accounts"
     resource :password, :only => [:edit, :update], module: "accounts"
   end
-
+  
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     passwords:     'users/passwords',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  # get 'after_omniauth_signup', to: 'registrations#new'
   
   resources :users do
     resource :relationships, only: [:create, :destroy]

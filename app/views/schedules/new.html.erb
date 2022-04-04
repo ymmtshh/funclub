@@ -3,6 +3,9 @@
     <%= f.label :title, "イベントタイトル", :class => "form-label" %><br />
     <%= f.text_field :title, :class => "form-control" %><br />
 
+    <%= f.label :schedule_date, "日時", class: 'form-label' %><br />
+    <%= f.datetime_field :schedule_date, class: 'form-control' %><br />
+
     <%= f.label :body, "詳細", :class => "form-label" %><br />
     <%= f.text_area :body, :class => "form-control" %><br />
 

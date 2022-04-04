@@ -45,7 +45,8 @@ class SchedulesController < ApplicationController
       :body,
       :image,
       :image_cache,
-      :remove_image
+      :remove_image,
+      :schedule_date
     )
   end
 
