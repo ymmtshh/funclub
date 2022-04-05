@@ -6,6 +6,9 @@
         <%= form.text_field :title, :class => "form-control" %>
       </div>
 
+      <%= form.label :published_date, "公開日", class: 'form-label' %><br />
+      <%= form.date_field :published_date, class: 'form-control' %>
+
       <div class="form-group">
         <%= form.label :body, "詳細", :class => "form-label" %><br />
         <%= form.text_area :body, :class => "form-control" %>

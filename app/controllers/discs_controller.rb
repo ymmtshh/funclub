@@ -47,7 +47,8 @@ class DiscsController < ApplicationController
       :body,
       :image,
       :image_cache,
-      :remove_image
+      :remove_image,
+      :published_date
     )
   end
 

@@ -3,7 +3,11 @@
 イベントタイトル<br>
 <%= @schedule.title%><br>
 日時<br>
-<%= @schedule.schedule_date.strftime("%Y/%m/%d %H:%M") %><br>
+<%= @schedule.schedule_date.strftime("%Y年%-m月%-d日")  %><br>
+OPEN
+<%= @schedule.open_time.strftime("%H:%M") %>
+/ START
+<%= @schedule.start_time.strftime("%H:%M") %><br>
 イベント詳細<br>
 <%=simple_format @schedule.body%><br>
 

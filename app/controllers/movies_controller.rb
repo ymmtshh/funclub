@@ -45,7 +45,8 @@ class MoviesController < ApplicationController
       :body,
       :video,
       :video_cache,
-      :remove_video
+      :remove_video,
+      :published_date
     )
   end
 

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "published_date"
     t.index ["user_id"], name: "index_discs_on_user_id"
   end
 
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.string "video"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "published_date"
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
@@ -99,7 +101,9 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "schedule_date"
+    t.date "schedule_date"
+    t.time "open_time"
+    t.time "start_time"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
