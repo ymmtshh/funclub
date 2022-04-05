@@ -2,8 +2,11 @@
 
 タイトル<br>
 <%= @movie.title%><br>
+
+<% if @movie.published_date? %>
 公開日<br>
 <%= @movie.published_date.strftime("%Y年%-m月%-d日") %><br>
+<% end %>
 
 詳細<br>
 <%=simple_format @movie.body%><br>

@@ -42,7 +42,6 @@ class DiscsController < ApplicationController
   def disc_params
     params.require(:disc).permit(
       :title,
-      :release,
       :price,
       :body,
       :image,

@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
   create_table "discs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
-    t.string "release"
     t.string "price"
     t.text "body"
     t.string "image"

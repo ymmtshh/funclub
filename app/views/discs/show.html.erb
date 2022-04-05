@@ -7,9 +7,10 @@
 タイトル<br>
 <%= @disc.title%><br>
 
+<% if @disc.published_date? %>
 リリース日<br>
-<%=simple_format @disc.release%><br>
 <%= @disc.published_date.strftime("%Y年%-m月%-d日")  %><br>
+<% end %>
 
 価格<br>
 <%=simple_format @disc.price%><br>
