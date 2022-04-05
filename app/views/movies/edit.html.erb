@@ -17,7 +17,9 @@
         <div class="form-group row">
         <div class="col-sm-4">
           <div class="video-player">
-              <%= video_tag @movie.video.url, autoplay: false, muted: false, controls: true , :size => "854x480"%>
+          <% if @movie.video? %>
+            <%= video_tag @movie.video.url, autoplay: false, muted: false, controls: true , :size => "854x480"%>
+          <% end %>
           </div>
 
         </div>
