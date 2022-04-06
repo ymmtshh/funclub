@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :goods, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :movies, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # フォローする側から中間テーブルへのアソシエーション
   has_many :relationships, foreign_key: :following_id, dependent: :destroy

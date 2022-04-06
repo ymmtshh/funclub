@@ -15,6 +15,23 @@ OPEN
     <%= image_tag @schedule.image.to_s %>
 <% end %>
 
+  <div class="comments ml-5 mt-5">
+  <%= form_with(model:[@schedule, @comment], local: true) do |f| %>
+    <%= f.text_area :comment_content, :size=>"60x3",placeholder: "コメントする" %>
+    <%= f.submit "送信する", class: "btn btn-success mb-4" %>
+  <% end %>
+
+
+  <p>コメント件数：<%= @comments.count %></p>
+    <% @comments.each do |comment| %><br>
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+      <%= comment.user.username %>
+      <%= comment.comment_content %>
+    <% end %><br>
+
+
+
+
 <%= link_to "一覧へ戻る", schedules_user_path(@schedule.user_id) %>
 
 <% if @schedule.user_id == current_user.id %>

@@ -32,12 +32,15 @@ Rails.application.routes.draw do
   end
   
   resources :profiles, only: [:edit, :update]
-  resources :schedules, only: [:show, :new, :edit, :create, :update, :destroy]
+
+  resources :schedules, only: [:show, :new, :edit, :create, :update, :destroy] do
+    resources :comments, only: [:create]  
+  end
+  
   resources :posts, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :discs, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :goods, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :movies, only: [:show, :new, :edit, :create, :update, :destroy]
-  
   resources :contacts, only: [:show, :create, :destroy]
   
   root 'home#index'

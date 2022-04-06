@@ -2,6 +2,8 @@ class SchedulesController < ApplicationController
   before_action :find_schedule, only: [:show, :edit, :update, :destroy]
 
   def show
+    @comments = @schedule.comments.includes(:user).all
+    @comment  = @schedule.comments.build(user_id: current_user.id) if current_user
   end
 
   def new
@@ -48,12 +50,13 @@ class SchedulesController < ApplicationController
       :remove_image,
       :schedule_date,
       :open_time,
-      :start_time
+      :start_time,
+      :comment_content
     )
   end
 
   def find_schedule
-    @schedule = Schedule.find(params[:id])
+    @schedule = Schedule.includes(:user).find(params[:id])
   end
 
 end

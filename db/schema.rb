@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_26_045000) do
+ActiveRecord::Schema.define(version: 2022_04_06_141055) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "comment_content"
+    t.bigint "user_id", null: false
+    t.bigint "schedule_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["schedule_id"], name: "index_comments_on_schedule_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -137,6 +147,8 @@ ActiveRecord::Schema.define(version: 2022_03_26_045000) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "comments", "schedules"
+  add_foreign_key "comments", "users"
   add_foreign_key "contacts", "users"
   add_foreign_key "discs", "users"
   add_foreign_key "goods", "users"
