@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
   
   def new
+    @user = User.find(current_user.id)
     @post = Post.new
   end
   
@@ -14,9 +15,9 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post.user_id = params[:user_id]
     if @post.save
-      redirect_to post_path(@post), notice: "NEWSを作成しました。"
+      redirect_to user_posts_path(@post.user_id), notice: "NEWSを作成しました。"
     else
       render :new
     end
@@ -32,9 +33,9 @@ class PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      redirect_to posts_user_path(@post.user_id), notice: "NEWSを削除しました。"
+      redirect_to user_posts_path(@post.user_id), notice: "NEWSを削除しました。"
     else
-      redirect_to posts_user_path(@post.user_id), alert: "NEWSを削除できませんでした。"
+      redirect_to user_posts_path(@post.user_id), alert: "NEWSを削除できませんでした。"
     end
   end
   
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
   
   def post_params
     params.require(:post).permit(
+      :user_id,
       :title,
       :body,
       :image,

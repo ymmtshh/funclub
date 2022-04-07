@@ -1,0 +1,21 @@
+<%= form_with(model: [user, post], local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title, "タイトル", :class => "form-label" %><br />
+    <%= f.text_field :title, :class => "form-control" %><br />
+
+    <%= f.label :body, "詳細", :class => "form-label" %><br />
+    <%= f.text_area :body, :class => "form-control" %><br />
+
+    <%= image_tag @post.image.to_s, :id => "avatar-prev" %>
+    <% if @post.image? %>
+    <label><%= f.check_box :remove_image %> 画像を削除する</label>
+    <% else %>
+    <%= f.hidden_field :image_cache %>
+    <%= f.label "画像をアップロード" %><br>
+    <%= f.file_field :image, :id => "avatar-img", :class => "form-control-file" %><br />
+    <% end %>
+
+    <%= f.submit "送信", :class => "btn btn-primary" %><br />
+  </div>
+<% end %>

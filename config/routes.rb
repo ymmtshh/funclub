@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get :followers, on: :member
     get :schedules,on: :member
     get :posts, on: :member
+    resources :posts, only: [:new, :create, :update]
     get :discs, on: :member
     get :goods, on: :member
     get :movies, on: :member
@@ -31,13 +32,13 @@ Rails.application.routes.draw do
     get 'done', to: 'contacts#done', as: 'done'
   end
   
+  resources :posts, only: [:show, :edit, :destroy]
   resources :profiles, only: [:edit, :update]
 
   resources :schedules, only: [:show, :new, :edit, :create, :update, :destroy] do
     resources :comments, only: [:create]  
   end
   
-  resources :posts, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :discs, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :goods, only: [:show, :new, :edit, :create, :update, :destroy]
   resources :movies, only: [:show, :new, :edit, :create, :update, :destroy]
