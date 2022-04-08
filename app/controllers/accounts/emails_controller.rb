@@ -5,7 +5,7 @@ class Accounts::EmailsController < ApplicationController
     end
 
     def update
-        if current_user.update_with_password(user_params)
+        if current_user.update(user_params)
             redirect_to account_path
         else
             render :edit
@@ -14,6 +14,8 @@ class Accounts::EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-        params.require(:user).permit(:email, :current_password)
+        params.require(:user).permit(
+            :email
+        )
     end
 end

@@ -1,31 +1,25 @@
-<div class="card col-sm-5 mx-auto mt-5">
-  <div class="card-body">
-    <h3 class="mt-1 mb-3">ログインユーザー</h3>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <h3>ログインユーザー</h3>
+    <%= form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :login, "ユーザ名", :class => "form-label" %><br />
+        <%= f.text_field :login, autofocus: true, autocomplete: "login", :class => "form-control" %><br />
 
-    <div class="form-group">
-      <%= f.label :login, "ユーザ名", :class => "form-label" %><br />
-      <%= f.text_field :login, autofocus: true, autocomplete: "login", :class => "form-control" %>
-    </div>
+        <%= f.label :password, "パスワード", :class => "form-label" %><br />
+        <%= f.password_field :password, :class => "form-control" %><br />
 
-    <div class="form-group">
-      <%= f.label :password, "パスワード", :class => "form-label" %><br />
-      <%= f.password_field :password, :class => "form-control" %><br />
-      <% if devise_mapping.rememberable? %>
-      <div class="form-check">
-        <%= f.check_box :remember_me, :class => "form-check-input" %>
-        <%= f.label :remember_me, "ログインを記憶", :class => "form-check-label" %>
+        <% if devise_mapping.rememberable? %>
+          <%= f.label :remember_me, "ログインを記憶", :class => "form-check-label" %>
+          <%= f.check_box :remember_me, :class => "form-check-input" %><br />
+        <% end %>
+
+        <%= f.submit "ログイン", :class => "btn btn-primary btn-block" %><br /><br />
       </div>
-      <% end %>
-      <%= link_to "パスワードを忘れた場合", new_user_password_path, :class => "float-right" %><br />
-    </div>
- 
-    <div class="actions">
-      <%= f.submit "ログイン", :class => "btn btn-primary btn-block" %>
-    </div>
     <% end %>
- 
-    <div class="small text-muted text-center mt-4">新しいユーザですか?</div>
+
+
+    <%= link_to "パスワードを忘れた場合", new_user_password_path, :class => "float-right" %><br />
+    <%= link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path, method: :post %><br />
+    <%= link_to 'Googleアカウントでログイン', user_google_oauth2_omniauth_authorize_path, method: :post %><br />
+
+    新しいユーザですか?<br />
     <%= link_to "アカウントを作成", new_user_registration_path, :class => "btn btn-light btn-block border mt-1" %>
-  </div>
-</div>

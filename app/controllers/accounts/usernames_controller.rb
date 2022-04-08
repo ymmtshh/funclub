@@ -5,7 +5,7 @@ class Accounts::UsernamesController < ApplicationController
     end
 
     def update
-        if current_user.update_with_password(user_params)
+        if current_user.update(user_params)
             redirect_to account_path
         else
             render :edit
@@ -18,6 +18,8 @@ class Accounts::UsernamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-        params.require(:user).permit(:username, :current_password)
+        params.require(:user).permit(
+            :username
+        )
     end
 end
