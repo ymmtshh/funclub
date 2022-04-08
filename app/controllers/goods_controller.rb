@@ -1,10 +1,12 @@
 class GoodsController < ApplicationController
   before_action :find_good, only: [:show, :edit, :update, :destroy]
 
+
   def show
   end
 
   def new
+    @user = User.find(current_user.id)
     @good = Good.new
   end
 
@@ -13,7 +15,7 @@ class GoodsController < ApplicationController
 
   def create
     @good = Good.new(good_params)
-    @good.user_id = current_user.id
+    @good.user_id = params[:user_id]
     if @good.save
       redirect_to good_path(@good), notice: "GOODSを作成しました。"
     else
@@ -38,9 +40,13 @@ class GoodsController < ApplicationController
   end
 
   private
+  def find_good
+    @good = Good.find(params[:id])
+  end
 
   def good_params
     params.require(:good).permit(
+      :user_id,
       :title,
       :body,
       :price,
@@ -50,7 +56,4 @@ class GoodsController < ApplicationController
     )
   end
 
-  def find_good
-    @good = Good.find(params[:id])
-  end
 end

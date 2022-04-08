@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
   end
 
   def new
+    @user = User.find(current_user.id)
     @movie = Movie.new
   end
 
@@ -13,7 +14,7 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    @movie.user_id = current_user.id
+    @movie.user_id = params[:user_id]
     if @movie.save
       redirect_to movie_path(@movie), notice: "動画を投稿しました。"
     else
@@ -38,9 +39,13 @@ class MoviesController < ApplicationController
   end
 
   private
+  def find_movie
+    @movie = Movie.find(params[:id])
+  end
 
   def movie_params
     params.require(:movie).permit(
+      :user_id,
       :title,
       :body,
       :video,
@@ -48,9 +53,5 @@ class MoviesController < ApplicationController
       :remove_video,
       :published_date
     )
-  end
-
-  def find_movie
-    @movie = Movie.find(params[:id])
   end
 end

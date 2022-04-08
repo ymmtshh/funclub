@@ -1,18 +1,4 @@
-<%= form_with model: @movie, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :title, "タイトル", :class => "form-label" %><br />
-    <%= f.text_field :title, :class => "form-control" %><br />
+<h1>MOVIEを作成</h1>
 
-    <%= f.label :published_date, "公開日", class: 'form-label' %><br />
-    <%= f.date_field :published_date, class: 'form-control' %><br />
-
-    <%= f.label :body, "詳細", :class => "form-label" %><br />
-    <%= f.text_area :body, :class => "form-control" %><br />
-
-    <%= f.label "動画をアップロード" %><br>
-    <%= f.file_field :video, :accept => 'video/*' %>
-
-    <%= f.submit "投稿する", :class => "btn btn-primary" %><br />
-    <%= link_to 'キャンセル' , "", :class => "btn btn-light" %><br />
-  </div>
-<% end %>
+<%= render partial: "form", locals: { user: @user, movie: @movie} %>
+<%= link_to 'キャンセル' , movies_user_path(@user), :class => "btn btn-light" %>

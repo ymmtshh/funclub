@@ -1,10 +1,10 @@
 <%= @user.profile.name %>さんのGOODS一覧<br>
-<% @user.goods.each do |good| %>
+<% @goods.each do |good| %>
   <%= link_to good_path(good) do %>
   <%= good.title %><br>
   <% end %>
 <% end %>
 
 <% if @user.id == current_user.id %>
-  <%= link_to "新規作成", new_good_path %>
+  <%= link_to "新規作成", new_user_good_path(@user.id) %>
 <% end %>

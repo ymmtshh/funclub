@@ -70,7 +70,6 @@
 </div>
 
 <div class="d-flex flex-column">
-  <!-- アバターファイルの表示 -->
   <%= image_tag @user.profile.avatar.to_s, :class => "float-center border mb-2 mx-auto" %>
 </div>
 
@@ -83,9 +82,9 @@
 <div>web:</div>
 <div><%= @user.profile.web %></div>
 
-<%= link_to "NEWS", user_posts_path(@user.id) %>
+<%= link_to "NEWS", posts_user_path(@user.id) %>
 <%= link_to "スケジュール", schedules_user_path %>
-<%= link_to "DISCOGRAPHY", discs_user_path %>
-<%= link_to "MOVIE", movies_user_path %>
-<%= link_to "GOODS", goods_user_path %>
+<%= link_to "DISCOGRAPHY", discs_user_path(@user.id) %>
+<%= link_to "MOVIE", movies_user_path(@user.id) %>
+<%= link_to "GOODS", goods_user_path(@user.id) %>
 <%= link_to "CONTACT", new_user_contact_path(@user.id) %>

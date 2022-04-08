@@ -1,4 +1,4 @@
-<h1>NEWSを新規投稿</h1>
+<h1>NEWSを作成</h1>
 
 <%= render partial: "form", locals: { user: @user, post: @post} %>
-<%= link_to 'キャンセル' , user_posts_path(@user), :class => "btn btn-light" %>
+<%= link_to 'キャンセル' , posts_user_path(@user), :class => "btn btn-light" %>

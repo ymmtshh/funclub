@@ -1,10 +1,12 @@
 class DiscsController < ApplicationController
   before_action :find_disc, only: [:show, :edit, :update, :destroy]
 
+
   def show
   end
 
   def new
+    @user = User.find(current_user.id)
     @disc = Disc.new
   end
 
@@ -13,7 +15,7 @@ class DiscsController < ApplicationController
 
   def create
     @disc = Disc.new(disc_params)
-    @disc.user_id = current_user.id
+    @disc.user_id = params[:user_id]
     if @disc.save
       redirect_to disc_path(@disc), notice: "DISCOGRAPHYを作成しました。"
     else
@@ -38,20 +40,20 @@ class DiscsController < ApplicationController
   end
 
   private
+  def find_disc
+    @disc = Disc.find(params[:id])
+  end
 
   def disc_params
     params.require(:disc).permit(
+      :user_id,
       :title,
+      :published_date,
       :price,
       :body,
       :image,
       :image_cache,
-      :remove_image,
-      :published_date
+      :remove_image
     )
-  end
-
-  def find_disc
-    @disc = Disc.find(params[:id])
   end
 end

@@ -1,15 +1,16 @@
 <p>NEWS詳細</p>
 
 タイトル<br>
-<%= @post.title%><br>
-詳細<br>
-<%=simple_format @post.body%><br>
-
 <% if @post.image? %>
     <%= image_tag @post.image.to_s %>
 <% end %>
 
-<%= link_to "一覧へ戻る", user_posts_path(@post.user_id) %>
+<%= @post.title%><br>
+
+詳細<br>
+<%=simple_format @post.body%><br>
+
+<%= link_to "一覧へ戻る", posts_user_path(@post.user_id) %>
 
 <% if @post.user_id == current_user.id %>
   <%= link_to "編集", edit_post_path(@post) %>

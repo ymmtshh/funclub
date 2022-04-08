@@ -14,6 +14,6 @@
 <%= link_to "一覧へ戻る", goods_user_path(@good.user_id) %>
 
 <% if @good.user_id == current_user.id %>
-  <%= link_to "編集", edit_good_path %>
-  <%= link_to "削除", good_path, method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= link_to "編集", edit_good_path(@good) %>
+  <%= link_to "削除", good_path(@good), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>
