@@ -7,6 +7,7 @@ class SchedulesController < ApplicationController
   end
 
   def new
+    @user = User.find(current_user.id)
     @schedule = Schedule.new
   end
 
@@ -15,7 +16,7 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
-    @schedule.user_id = current_user.id
+    @schedule.user_id = params[:user_id]
     if @schedule.save
       redirect_to schedule_path(@schedule), notice: "スケジュールを作成しました。"
     else
@@ -40,9 +41,13 @@ class SchedulesController < ApplicationController
   end
 
   private
+  def find_schedule
+    @schedule = Schedule.includes(:user).find(params[:id])
+  end
 
   def schedule_params
     params.require(:schedule).permit(
+      :user_id,
       :title,
       :body,
       :image,
@@ -55,8 +60,5 @@ class SchedulesController < ApplicationController
     )
   end
 
-  def find_schedule
-    @schedule = Schedule.includes(:user).find(params[:id])
-  end
 
 end

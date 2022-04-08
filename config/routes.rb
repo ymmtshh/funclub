@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get :followers, on: :member
 
     get :schedules,on: :member
+    resources :schedules, only: [:new, :create, :update]
     
     get :posts, on: :member
     resources :posts, only: [:new, :create, :update]
@@ -45,11 +46,11 @@ Rails.application.routes.draw do
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]
   resources :movies, only: [:show, :edit, :destroy]
-  
-  resources :profiles, only: [:edit, :update]
-  resources :schedules, only: [:show, :new, :edit, :create, :update, :destroy] do
+  resources :schedules, only: [:show, :edit, :destroy] do
     resources :comments, only: [:create]  
   end
+  
+  resources :profiles, only: [:edit, :update]
   
   resources :contacts, only: [:show, :create, :destroy]
   

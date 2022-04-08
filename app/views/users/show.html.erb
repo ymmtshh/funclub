@@ -83,7 +83,7 @@
 <div><%= @user.profile.web %></div>
 
 <%= link_to "NEWS", posts_user_path(@user.id) %>
-<%= link_to "スケジュール", schedules_user_path %>
+<%= link_to "スケジュール", schedules_user_path(@user.id) %>
 <%= link_to "DISCOGRAPHY", discs_user_path(@user.id) %>
 <%= link_to "MOVIE", movies_user_path(@user.id) %>
 <%= link_to "GOODS", goods_user_path(@user.id) %>

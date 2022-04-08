@@ -1,5 +1,5 @@
 <%= @user.profile.name %>さんのスケジュール一覧<br>
-<% @user.schedules.each do |schedule| %>
+<% @schedules.each do |schedule| %>
   <%= link_to schedule_path(schedule) do %>
   <%= schedule.title %><br>
   <% end %>
@@ -7,5 +7,5 @@
 
 
 <% if @user.id == current_user.id %>
-  <%= link_to "新規作成", new_schedule_path %>
+  <%= link_to "新規作成", new_user_schedule_path(@user.id) %>
 <% end %>

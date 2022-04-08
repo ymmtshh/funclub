@@ -21,7 +21,6 @@ OPEN
     <%= f.submit "送信する", class: "btn btn-success mb-4" %>
   <% end %>
 
-
   <p>コメント件数：<%= @comments.count %></p>
     <% @comments.each do |comment| %><br>
       <%= comment.created_at.strftime('%Y/%m/%d') %>
@@ -29,12 +28,9 @@ OPEN
       <%= comment.comment_content %>
     <% end %><br>
 
-
-
-
 <%= link_to "一覧へ戻る", schedules_user_path(@schedule.user_id) %>
 
 <% if @schedule.user_id == current_user.id %>
-  <%= link_to "編集", edit_schedule_path %>
-  <%= link_to "削除", schedule_path, method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= link_to "編集", edit_schedule_path(@schedule) %>
+  <%= link_to "削除", schedule_path(@schedule), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>
