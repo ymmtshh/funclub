@@ -1,25 +1,18 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_user!, except: [:show]
+    # before_action :authenticate_user!, except: [:show]
     before_action :set_profile
 
-    # def show
-    # end
+    def show
+    end
 
     def edit
     end
 
     def update
-        respond_to do |format|
-            if @profile.update(profile_params)
-                format.html {
-                    redirect_to user_path(current_user),
-                    notice: "プロフィールを更新しました"
-                }
-            else
-                format.html {
-                    render :edit
-                }
-            end
+        if @profile.update(profile_params)
+            redirect_to profile_path(@profile), notice: "プロフィールを更新しました。"
+        else
+            render :edit
         end
     end
 
@@ -30,6 +23,7 @@ class ProfilesController < ApplicationController
 
     def profile_params
         params.require(:profile).permit(
+            :user_id,
             :name,
             :introduction,
             :location,

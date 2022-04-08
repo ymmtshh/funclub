@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
+    
+    resources :profiles, only: [:update]
 
     get :schedules,on: :member
     resources :schedules, only: [:new, :create, :update]
@@ -33,25 +35,26 @@ Rails.application.routes.draw do
     get :movies, on: :member
     resources :movies, only: [:new, :create, :update]
 
-    get :contacts, on: :member
-    get :unsubscribe, on: :member
-    patch :withdrawal, on: :member
+    get :contacts, on: :member  
     resources :contacts, only: [:new]
     post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
     post 'contacts/back', to: 'contacts#back', as: 'back'
     get 'done', to: 'contacts#done', as: 'done'
+    
+    get :unsubscribe, on: :member
+    patch :withdrawal, on: :member
   end
   
+  resources :profiles, only: [:show, :edit]
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]
   resources :movies, only: [:show, :edit, :destroy]
+
   resources :schedules, only: [:show, :edit, :destroy] do
     resources :comments, only: [:create]  
   end
-  
-  resources :profiles, only: [:edit, :update]
-  
+
   resources :contacts, only: [:show, :create, :destroy]
   
   root 'home#index'
