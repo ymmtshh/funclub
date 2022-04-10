@@ -6,9 +6,10 @@ class Accounts::PasswordsController < ApplicationController
 
     def update
         if current_user.update_with_password(user_params)
-            redirect_to account_path
+            sign_in(current_user, bypass: true)
+            redirect_to account_path, notice: 'パスワードを変更しました'
         else
-            render :edit
+            redirect_to edit_account_password_path, notice: 'パスワードを変更できませんでした'
         end
     end
 

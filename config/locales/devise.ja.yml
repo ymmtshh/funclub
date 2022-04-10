@@ -91,6 +91,7 @@ ja:
       updated: パスワードが正しく変更されました。
       updated_not_active: パスワードが正しく変更されました。
     registrations:
+      signed_up_but_needs_confirmation: "ご登録いただいたメールアドレスにメールを送信しました。メールを確認してアカウントを本登録をしてください。"
       destroyed: アカウントを削除しました。またのご利用をお待ちしております。
       edit:
         are_you_sure: 本当によろしいですか？

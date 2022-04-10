@@ -22,4 +22,7 @@
     <%= link_to 'Googleアカウントでログイン', user_google_oauth2_omniauth_authorize_path, method: :post %><br />
 
     新しいユーザですか?<br />
-    <%= link_to "アカウントを作成", new_user_registration_path, :class => "btn btn-light btn-block border mt-1" %>
+    <%= link_to "アカウントを作成", new_user_registration_path, :class => "btn btn-light btn-block border mt-1" %><br>
+
+    ________________________________________________________________<br>
+<%= render "devise/shared/links" %>

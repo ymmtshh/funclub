@@ -6,9 +6,9 @@ class Accounts::EmailsController < ApplicationController
 
     def update
         if current_user.update(user_params)
-            redirect_to account_path
+            redirect_to account_path, notice: 'メールアドレスを変更しました'
         else
-            render :edit
+            redirect_to edit_account_email_path, notice: 'メールアドレスを変更できませんでした'
         end
     end
 

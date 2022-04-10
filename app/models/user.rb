@@ -1,15 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
           :recoverable, :rememberable, :validatable, :lockable, :timeoutable, :trackable,
           :omniauthable, omniauth_providers:[:twitter, :google_oauth2],
-          :authentication_keys => [:login]
-          # :confirmable,
+          authentication_keys: [:login]
+
 
   validates :band, inclusion: [true, false]
-  # validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
+  validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
 
+  # usernameのみでログイン
   attr_writer :login
   def login
     @login || self.username || self.email
@@ -24,9 +24,19 @@ class User < ApplicationRecord
     end
   end
 
+  def password_required?
+    super && confirmed?
+  end
+
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
+    super && confirmed?
+    # skip_confirmation!
     super && (is_deleted == false)
+  end
+
+  def inactive_message
+    confirmed? ? super : :needs_confirmation
   end
 
   # SNS認証

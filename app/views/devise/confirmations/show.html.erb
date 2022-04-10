@@ -1,0 +1,44 @@
+<h2><%= "パスワードの登録" %></h2>
+
+<%= form_for(resource, as: resource_name, url: users_confirm_path) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "パスワード（確認）" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <%= f.hidden_field :confirmation_token %>
+
+  <div class="actions">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>
+
+  <%
+=begin%>
+ <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
+  <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
+
+  <% if @user.provider.blank? %>
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %><br />
+      <%= f.password_field :password, autocomplete: "password" %>
+    </div>
+      <%= f.label :password_confirmation, "もう一度パスワードを入力してください", :class => "form-label" %><br />
+      <%= f.password_field :password_confirmation, :class => "form-control" %><br />
+  <% end %>  
+<%
+=end%>
+

@@ -2,25 +2,12 @@
 
   <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-
       <div class="form-group">
-        <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
-        <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
+        <%= f.label :username, "ユーザー名", :class => "form-label" %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
 
         <%= f.label :email, "メールアドレス", :class => "form-label" %><br />
-        <%= f.email_field :email, value: @user.email, autocomplete: "email", :class => "form-control" %><br />
-
-          <% if @user.provider.blank? %>
-            <div class="form-group">
-              <%= f.label :password, "パスワード" %>
-                <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> 文字以上)</em>
-                <% end %><br />
-              <%= f.password_field :password, autocomplete: "password" %>
-            </div>
-              <%= f.label :password_confirmation, "もう一度パスワードを入力してください", :class => "form-label" %><br />
-              <%= f.password_field :password_confirmation, :class => "form-control" %><br />
-          <% end %>
+        <%= f.email_field :email, autocomplete: "email", :class => "form-control" %><br />
 
         <%= f.label :band, "バンドアカウントを登録する", :class => "form-label" %><br />
         <%= f.check_box :band, {}, "true", "false" %><br />
@@ -32,4 +19,11 @@
 <%= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post %><br />
 <%= link_to 'Googleアカウントで登録', user_google_oauth2_omniauth_authorize_path, method: :post %><br />
 すでにアカウントをお持ちですか？<br />
-<%= link_to "ログイン", new_user_session_path %>
+<%= link_to "ログイン", new_user_session_path %><br />
+<%
+=begin%>
+ ________________________________________________________________<br>
+<%= render "devise/shared/links" %> 
+<%
+=end%>
+
