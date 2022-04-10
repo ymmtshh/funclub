@@ -1,4 +1,6 @@
-<h3>メールアドレスを変更する</h3>
+<%
+=begin%>
+ <h3>メールアドレスを変更する</h3>
 
   <%= form_with(model: current_user, url: account_email_path, method: :put, local: true) do |f| %>
     <div class="form-group">
@@ -9,4 +11,6 @@
     </div>
   <% end %>
     <%= link_to "キャンセル", "/account", :class => "btn btn-light" %>
-
+ 
+<%
+=end%>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resource :account, only: [:show] do
     resource :username, only: [:edit, :update], module: "accounts"
-    resource :email, only: [:edit, :update], module: "accounts"
+    # resource :email, only: [:edit, :update], module: "accounts"
     resource :password, only: [:edit, :update], module: "accounts"
   end
 

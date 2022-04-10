@@ -30,8 +30,8 @@ class User < ApplicationRecord
 
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
-    super && confirmed?
-    # skip_confirmation!
+    skip_confirmation!
+    # super && confirmed?
     super && (is_deleted == false)
   end
 
