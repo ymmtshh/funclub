@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
 
   validates :band, inclusion: [true, false]
-  validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
+  # validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
 
   # usernameのみでログイン
   attr_writer :login
@@ -30,8 +30,8 @@ class User < ApplicationRecord
 
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
-    skip_confirmation!
-    # super && confirmed?
+    # skip_confirmation!
+    super && confirmed?
     super && (is_deleted == false)
   end
 
@@ -47,6 +47,8 @@ class User < ApplicationRecord
       user.username = auth["info"]["nickname"] 
           # OR auth["info"]["first_name"]
       user.email = auth["info"]["email"]
+      user.confirmed_at = Time.now.utc
+      user.confirmation_sent_at = Time.now.utc
     end
   end
   

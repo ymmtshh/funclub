@@ -4,23 +4,17 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-group">
-        <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
+      <% if @user.username? %>
+      <% else %>
+        <%= f.label :username, "USER ID", :class => "form-label" %><br />
         <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
+      <% end %>
 
-        <%= f.label :email, "メールアドレス", :class => "form-label" %><br />
+        <% if @user.email? %>
+        <% else %>
+        <%= f.label :email, "EMAIL", :class => "form-label" %><br />
         <%= f.email_field :email, value: @user.email, autocomplete: "email", :class => "form-control" %><br />
-
-          <% if @user.provider.blank? %>
-            <div class="form-group">
-              <%= f.label :password, "パスワード" %>
-                <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> 文字以上)</em>
-                <% end %><br />
-              <%= f.password_field :password, autocomplete: "password" %>
-            </div>
-              <%= f.label :password_confirmation, "もう一度パスワードを入力してください", :class => "form-label" %><br />
-              <%= f.password_field :password_confirmation, :class => "form-control" %><br />
-          <% end %>
+        <% end %>
 
         <%= f.label :band, "バンドアカウントを登録する", :class => "form-label" %><br />
         <%= f.check_box :band, {}, "true", "false" %><br />
