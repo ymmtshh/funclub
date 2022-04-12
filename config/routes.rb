@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :goods, only: [:show, :edit, :destroy]
   resources :movies, only: [:show, :edit, :destroy]
   resources :contacts, only: [:show, :create, :destroy]
+  resources :prefectures, only: [:index, :show]
 
   resources :schedules, only: [:show, :edit, :destroy] do
     resources :comments, only: [:create]  

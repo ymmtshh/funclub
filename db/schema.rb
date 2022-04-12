@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_140711) do
+ActiveRecord::Schema.define(version: 2022_04_12_152004) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "comment_content"
@@ -82,13 +82,14 @@ ActiveRecord::Schema.define(version: 2022_04_12_140711) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug", null: false
+    t.index ["slug"], name: "index_prefectures_on_slug", unique: true
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.text "introduction"
-    t.integer "location"
     t.text "web"
     t.string "avatar"
     t.string "twitter"
@@ -99,6 +100,8 @@ ActiveRecord::Schema.define(version: 2022_04_12_140711) do
     t.string "spotify"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "prefecture_id", null: false
+    t.index ["prefecture_id"], name: "index_profiles_on_prefecture_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -160,6 +163,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_140711) do
   add_foreign_key "goods", "users"
   add_foreign_key "movies", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "prefectures"
   add_foreign_key "profiles", "users"
   add_foreign_key "schedules", "users"
 end
