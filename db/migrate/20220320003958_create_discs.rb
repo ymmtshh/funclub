@@ -6,6 +6,7 @@ class CreateDiscs < ActiveRecord::Migration[6.0]
       t.string :price
       t.text :body
       t.string :image
+      t.date :published_date
 
       t.timestamps
     end

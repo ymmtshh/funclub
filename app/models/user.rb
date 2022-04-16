@@ -65,7 +65,7 @@ class User < ApplicationRecord
           # OR auth["info"]["first_name"]
       user.email = auth["info"]["email"]
       user.confirmed_at = Time.now.utc
-      user.confirmation_sent_at = Time.now.utc
+      # profile.name = user.username
     end
   end
   
@@ -74,6 +74,7 @@ class User < ApplicationRecord
       new(session["devise.user_attributes"]) do |user|
         user.attributes = params
         user.password = Devise.friendly_token[0, 20]
+        user.confirmation_sent_at = Time.now.utc
       end
     else
       super

@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_152004) do
+ActiveRecord::Schema.define(version: 2022_04_16_103102) do
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
     t.string "comment_content"
     t.bigint "user_id", null: false
     t.bigint "schedule_id", null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "contacts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.string "email", null: false
@@ -34,19 +37,19 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
-  create_table "discs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "discs", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.string "price"
     t.text "body"
     t.string "image"
+    t.date "published_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "published_date"
     t.index ["user_id"], name: "index_discs_on_user_id"
   end
 
-  create_table "goods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "goods", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.string "price"
@@ -57,18 +60,18 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.index ["user_id"], name: "index_goods_on_user_id"
   end
 
-  create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "movies", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.text "body"
     t.string "video"
+    t.date "published_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "published_date"
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.text "body"
@@ -78,18 +81,19 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "prefectures", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "slug", null: false
     t.index ["slug"], name: "index_prefectures_on_slug", unique: true
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.text "introduction"
+    t.bigint "prefecture_id", null: false
     t.text "web"
     t.string "avatar"
     t.string "twitter"
@@ -100,32 +104,31 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.string "spotify"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "prefecture_id", null: false
     t.index ["prefecture_id"], name: "index_profiles_on_prefecture_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "relationships", force: :cascade do |t|
     t.integer "following_id"
     t.integer "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "schedules", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.text "body"
-    t.string "image"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.date "schedule_date"
     t.time "open_time"
     t.time "start_time"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -146,10 +149,11 @@ ActiveRecord::Schema.define(version: 2022_04_12_152004) do
     t.string "username"
     t.string "provider"
     t.string "uid"
+    t.boolean "is_deleted", default: false, null: false
+    t.boolean "users", default: false, null: false
+    t.boolean "band", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_deleted", default: false, null: false
-    t.boolean "band", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
