@@ -1,7 +1,7 @@
-  <h3>ログインユーザー</h3>
+  <h1>ログイン</h1>
     <%= form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f| %>
       <div class="form-group">
-        <%= f.label :login, "ユーザ名", :class => "form-label" %><br />
+        <%= f.label :login, "ユーザ名もしくはメールアドレス", :class => "form-label" %><br />
         <%= f.text_field :login, autofocus: true, autocomplete: "login", :class => "form-control" %><br />
 
         <%= f.label :password, "パスワード", :class => "form-label" %><br />
@@ -16,13 +16,7 @@
       </div>
     <% end %>
 
-
-    <%= link_to "パスワードを忘れた場合", new_user_password_path, :class => "float-right" %><br />
     <%= link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path, method: :post %><br />
     <%= link_to 'Googleアカウントでログイン', user_google_oauth2_omniauth_authorize_path, method: :post %><br />
-
-    新しいユーザですか?<br />
-    <%= link_to "アカウントを作成", new_user_registration_path, :class => "btn btn-light btn-block border mt-1" %><br>
-
     ________________________________________________________________<br>
 <%= render "devise/shared/links" %>

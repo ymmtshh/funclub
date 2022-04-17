@@ -1,5 +1,5 @@
 class Prefecture < ApplicationRecord
-  has_many :profiles, dependent: :destroy
+  # has_many :profiles, dependent: :destroy
 
   def to_param
     slug

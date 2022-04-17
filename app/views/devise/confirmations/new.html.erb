@@ -1,5 +1,5 @@
-<h2>Resend confirmation instructions</h2>
-
+<h2>仮登録メールを再送信する</h2>
+アカウント作成のためのメールを再送信します。メールを確認して本登録に進んでください。
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 

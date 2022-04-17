@@ -9,12 +9,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def comfirm_email
+  end
+
   def create
     super
     resource.build_profile
-    resource.profile.name = resource.username
+    # resource.profile.name = resource.username
     resource.save
   end
+
+  
   
   # GET /resource/edit
   # def edit
@@ -73,12 +78,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
-  #   if @user.user_type == "band"
-  #     redirect_to posts_user_path
-  #   elsif @user.user_type == "fan"
-  #     redirect_to edit_profile_path
-  #   else
-  #     redirect_to new_user_registration_path
-  #   end
+  #   redirect_to comfirm_email_path
   # end
 end

@@ -1,9 +1,16 @@
 <h2><%= "パスワードの登録" %></h2>
 
 <%= form_for(resource, as: resource_name, url: users_confirm_path) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%
+=begin%>
+ <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
+    <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br /> 
+<%
+=end%>
+  
     <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -25,8 +32,6 @@
 
   <%
 =begin%>
- <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
-  <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
 
   <% if @user.provider.blank? %>
     <div class="form-group">

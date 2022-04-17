@@ -26,6 +26,10 @@ class User < ApplicationRecord
   # フォローされる側からフォローしているユーザを取得する
   has_many :followers, through: :reverse_of_relationships, source: :following
 
+# providerが空かnil で emailが入力されたときメールの認証を行う
+  def email_required?
+    (provider.blank? || !email.blank?) && super
+  end
 
   # usernameのみでログイン
   attr_writer :login
@@ -42,6 +46,36 @@ class User < ApplicationRecord
     end
   end
 
+  # SNS認証
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      # user.username = auth["info"]["nickname"] 
+          # OR auth["info"]["first_name"]
+      # user.email = self.dummy_email(auth)
+      user.password = Devise.friendly_token[0, 20]
+      user.confirmed_at = Time.now.utc
+      user.confirmation_sent_at = Time.now.utc
+      user.confirmation_token = Devise.friendly_token[0, 20]
+    end
+  end
+  
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
+    end
+  end
+
+  # あるユーザが引数で渡されたuserにフォローされているか調べるメソッド
+  def is_followed_by?(user)
+    reverse_of_relationships.find_by(following_id: user.id).present?
+  end
+
   def password_required?
     super && confirmed?
   end
@@ -55,37 +89,6 @@ class User < ApplicationRecord
   def inactive_message
     confirmed? ? super : :needs_confirmation
   end
-
-  # SNS認証
-  def self.from_omniauth(auth)
-    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.username = auth["info"]["nickname"] 
-          # OR auth["info"]["first_name"]
-      user.email = auth["info"]["email"]
-      user.confirmed_at = Time.now.utc
-      # profile.name = user.username
-    end
-  end
-  
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"]) do |user|
-        user.attributes = params
-        user.password = Devise.friendly_token[0, 20]
-        user.confirmation_sent_at = Time.now.utc
-      end
-    else
-      super
-    end
-  end
-
-  # あるユーザが引数で渡されたuserにフォローされているか調べるメソッド
-  def is_followed_by?(user)
-    reverse_of_relationships.find_by(following_id: user.id).present?
-  end
-
 
   # def self.find_for_oauth_google(auth)
   #   user = User.where(uid: auth.uid, provider: auth.provider).first

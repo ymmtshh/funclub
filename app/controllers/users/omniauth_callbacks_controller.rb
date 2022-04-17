@@ -35,9 +35,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_from
   end
 
-  def failure
-    redirect_to root_path
-  end
+  # def failure
+  #   redirect_to root_path
+  # end
 
   private
   def callback_from
@@ -45,10 +45,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"].except("extra"))
 
     if @user.persisted?
-        sign_in_and_redirect @user, event: :authentication
+      sign_in_and_redirect @user, event: :authentication
     else
-        session["devise.user_attributes"] = @user.attributes
-        redirect_to new_user_registration_url
+      @user.skip_confirmation!
+      session["devise.user_attributes"] = @user.attributes
+      redirect_to new_user_registration_url
     end
   end
 

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   devise_scope :user do
-    patch "users/confirm", to: "users/confirmations#confirm"
+    patch 'users/confirm', to: 'users/confirmations#confirm'
+    get 'comfirm_email', to: 'users/registrations#comfirm_email'
   end
 
   resources :users do
@@ -39,9 +40,9 @@ Rails.application.routes.draw do
       get 'done', to: 'contacts#done', as: 'done'
     get :unsubscribe, on: :member
     patch :withdrawal, on: :member
+    resources :profiles, only: [:show, :edit]
   end
   
-  resources :profiles, only: [:show, :edit]
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]

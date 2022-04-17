@@ -4,29 +4,29 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="form-group">
-      <% if @user.username? %>
-      <% else %>
-        <%= f.label :username, "USER ID", :class => "form-label" %><br />
-        <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br />
-      <% end %>
-
-        <% if @user.email? %>
-        <% else %>
+        <%
+=begin%>
+ <%= f.label :username, "USER ID", :class => "form-label" %><br />
+        <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br /> 
+<%
+=end%>
+        
         <%= f.label :email, "EMAIL", :class => "form-label" %><br />
         <%= f.email_field :email, value: @user.email, autocomplete: "email", :class => "form-control" %><br />
-        <% end %>
 
-        <%= f.label :band, "バンドアカウントを登録する", :class => "form-label" %><br />
-        <%= f.check_box :band, {}, "true", "false" %><br />
+        <%
+=begin%>
+ <%= f.label :band, "バンドアカウントを登録する", :class => "form-label" %><br />
+        <%= f.check_box :band, {}, "true", "false" %><br /> 
+<%
+=end%>
 
-        <%= f.submit "アカウントを作成する", :class => "btn btn-primary btn-block" %><br /><br />
+        <%= f.submit "仮登録", :class => "btn btn-primary btn-block" %><br /><br />
       </div>
   <% end %>
 
 <%= link_to 'Twitterで登録', user_twitter_omniauth_authorize_path, method: :post %><br />
 <%= link_to 'Googleアカウントで登録', user_google_oauth2_omniauth_authorize_path, method: :post %><br />
-すでにアカウントをお持ちですか？<br />
-<%= link_to "ログイン", new_user_session_path %><br />
 ________________________________________________________________<br>
 <%= render "devise/shared/links" %>
 
