@@ -36,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         # サインアップ操作
         sign_up(resource_name, resource)
         # リダイレクト先を指定
-        respond_with resource, location: after_sign_up_path_for(resource)
+        respond_with resource, location: edit_account_username_path(current_user.id)
       else
         # set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         # sessionを削除

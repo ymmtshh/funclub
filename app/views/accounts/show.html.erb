@@ -10,12 +10,12 @@
             <tr>
               <td>ユーザID:</td>
               <td><%= current_user.username %></td>
-              <td><%= link_to "ユーザーネームを変更する", edit_account_username_path %></td>
+              <td><%= link_to "ユーザーネームを変更する", edit_account_username_path(current_user.id) %></td>
             </tr>
             <%
 =begin%>
  <tr>
-              <td>メールアドレス:</td>
+              <td>メールアドレス:</td>  
               <td><%= current_user.email %></td>
               <td><%= link_to "メールアドレスを変更する", edit_account_email_path %></td>
             </tr> 
