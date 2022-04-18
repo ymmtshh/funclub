@@ -1,4 +1,4 @@
-<%= @user.profile.name %>さんのスケジュール一覧<br>
+
 <% @schedules.each do |schedule| %>
   <%= link_to schedule_path(schedule) do %>
   <%= schedule.title %><br>

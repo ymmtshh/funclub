@@ -23,7 +23,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if resource.update_attributes(confirm_params)
       self.resource = resource_class.confirm_by_token(confirmation_token)
       set_flash_message :notice, :confirmed
-      sign_in_and_redirect(resource_name, resource)
+      sign_in(resource_name, resource)
+      redirect_to schedules_user_path(@user.id)
     else
       render :action => "show"
     end

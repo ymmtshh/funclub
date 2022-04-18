@@ -41,7 +41,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         # set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         # sessionを削除
         expire_data_after_sign_in!
-        respond_with resource, location: comfirm_email_path(resource)
+        respond_with resource, location: comfirm_email_path
       end
     else
     # 先程のresource.saveが失敗していたら
@@ -110,7 +110,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    redirect_to comfirm_email_path
-  end
+  # def after_inactive_sign_up_path_for(resource)
+  #   redirect_to comfirm_email_path
+  # end
 end
