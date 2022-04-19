@@ -14,15 +14,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     # super
-    # resource.build_profile
-    # resource.profile.name = resource.username
-    # resource.save
     devise_create
   end
 
   def devise_create
     # ここでUser.new（と同等の操作）を行う
     build_resource(sign_up_params)
+    resource.build_profile
     # ここでUser.save（と同等の操作）を行う
     resource.save
     # ブロックが与えられたらresource(=User)を呼ぶ

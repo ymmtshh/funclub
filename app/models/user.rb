@@ -58,6 +58,7 @@ class User < ApplicationRecord
       user.confirmed_at = Time.now.utc
       user.confirmation_sent_at = Time.now.utc
       user.confirmation_token = Devise.friendly_token[0, 20]
+      user.build_profile
     end
   end
   
