@@ -91,6 +91,22 @@ class User < ApplicationRecord
     confirmed? ? super : :needs_confirmation
   end
 
+  def send_on_create_confirmation_instructions
+    generate_confirmation_token!  unless @raw_confirmation_token
+    send_devise_notification(:confirmation_on_create_instructions, @raw_confirmation_token, {})
+  end
+  
+
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+    if params[:password].blank? && params[:password_confirmation].blank? 
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
   # def self.find_for_oauth_google(auth)
   #   user = User.where(uid: auth.uid, provider: auth.provider).first
   #   unless user
