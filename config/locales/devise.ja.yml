@@ -50,7 +50,12 @@ ja:
         action: メールアドレスの確認
         greeting: "%{recipient}様"
         instruction: 以下のリンクをクリックし、メールアドレスの確認手続を完了させてください。
-        subject: メールアドレス確認メール
+        subject: メールアドレスの確認についてのご案内
+      confirmation_on_create_instructions:
+        action: メールアドレスの確認
+        greeting: "%{recipient}様"
+        instruction: 以下のリンクをクリックし、アカウントの本登録を完了させてください。
+        subject: アカウント仮登録完了のご案内
       email_changed:
         greeting: こんにちは、%{recipient}様。
         message: メールアドレスの（%{email}）変更が完了したため、メールを送信しています。

@@ -77,6 +77,7 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
+  # パスワードなしでもメール送信
   def password_required?
     super && confirmed?
   end
