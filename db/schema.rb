@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_103102) do
+ActiveRecord::Schema.define(version: 2022_04_21_142622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", id: :serial, force: :cascade do |t|
+    t.integer "prefecture_id"
+    t.string "name", limit: 16, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "comment_content"
@@ -81,19 +89,18 @@ ActiveRecord::Schema.define(version: 2022_04_16_103102) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "prefectures", force: :cascade do |t|
-    t.string "name"
-    t.string "slug", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["slug"], name: "index_prefectures_on_slug", unique: true
+  create_table "prefectures", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 4, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.text "introduction"
-    t.bigint "prefecture_id"
+    t.integer "prefecture"
     t.text "web"
     t.string "avatar"
     t.string "twitter"
@@ -104,7 +111,6 @@ ActiveRecord::Schema.define(version: 2022_04_16_103102) do
     t.string "spotify"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["prefecture_id"], name: "index_profiles_on_prefecture_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -166,7 +172,6 @@ ActiveRecord::Schema.define(version: 2022_04_16_103102) do
   add_foreign_key "goods", "users"
   add_foreign_key "movies", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "profiles", "prefectures"
   add_foreign_key "profiles", "users"
   add_foreign_key "schedules", "users"
 end

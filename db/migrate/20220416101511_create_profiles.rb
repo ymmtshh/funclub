@@ -4,7 +4,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.string :name
       t.text :introduction
-      t.references :prefecture, foreign_key: true
+      t.integer :prefecture
       t.text :web
       t.string :avatar
       t.string :twitter
