@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_21_142622) do
+ActiveRecord::Schema.define(version: 2022_04_22_234956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cities", id: :serial, force: :cascade do |t|
-    t.integer "prefecture_id"
-    t.string "name", limit: 16, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
+  create_table "cities", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "prefecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -89,18 +89,19 @@ ActiveRecord::Schema.define(version: 2022_04_21_142622) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "prefectures", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 4, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
+  create_table "prefectures", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_prefectures_on_name", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.text "introduction"
-    t.integer "prefecture"
+    t.integer "prefecture_id"
+    t.integer "city_id"
     t.text "web"
     t.string "avatar"
     t.string "twitter"
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 2022_04_21_142622) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "cities", "prefectures"
   add_foreign_key "comments", "schedules"
   add_foreign_key "comments", "users"
   add_foreign_key "contacts", "users"

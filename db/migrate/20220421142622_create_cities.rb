@@ -1,12 +1,10 @@
 class CreateCities < ActiveRecord::Migration[6.0]
   def change
-    create_table :cities, id: :serial do |t|
-      t.integer :prefecture_id
-      t.string :name, null: false, limit: 16
+    create_table :cities do |t|
+      t.string :name, null: false
+      t.references :prefecture, null: false, foreign_key: true
 
-      t.datetime :created_at
-      t.datetime :updated_at
-      t.datetime :deleted_at
+      t.timestamps
     end
   end
 end

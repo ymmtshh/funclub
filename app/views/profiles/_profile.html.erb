@@ -59,11 +59,9 @@
   <%= profile.introduction %><br>
 
   場所:<br>
-  <%
-=begin%>
- <%= profile.location %><br> 
-<%
-=end%>
+  <%= @profile.prefecture.name %> 
+  <%= @profile.city.name %><br> 
+
 
   web:<br>
   <%= profile.web %><br>
