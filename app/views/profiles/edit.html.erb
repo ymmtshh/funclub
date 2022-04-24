@@ -18,12 +18,10 @@
         <%= f.text_area :introduction, :class => "form-control" %><br />
 
       <%= f.label :prefecture_id, "活動拠点" %><br>
-      <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
-      <%= f.collection_select :city_id, City.all, :id, :name %><br>
+      <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
 
         <%= f.label :web, "web", :class => "form-label" %><br />
         <%= f.text_field :web, :class => "form-control" %><br />
-
 
       <h2> SNS URL </h2>
         <div class="form-group">

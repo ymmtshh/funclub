@@ -60,8 +60,7 @@
 
   場所:<br>
   <%= @user.profile.prefecture.name %> 
-  <%= @user.profile.city.name %><br> 
-
+  <%= link_to prefecture_path(@user.profile.prefecture) %>
 
   web:<br>
   <%= profile.web %><br>

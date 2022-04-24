@@ -27,7 +27,6 @@ class ProfilesController < ApplicationController
             :name,
             :introduction,
             :prefecture_id,
-            :city_id,
             :web,
             :avatar,
             :avatar_cache,

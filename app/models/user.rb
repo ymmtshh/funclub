@@ -58,7 +58,7 @@ class User < ApplicationRecord
       user.confirmed_at = Time.now.utc
       user.confirmation_sent_at = Time.now.utc
       user.confirmation_token = Devise.friendly_token[0, 20]
-      user.build_profile
+      # user.build.profile
     end
   end
   
@@ -96,7 +96,6 @@ class User < ApplicationRecord
     generate_confirmation_token!  unless @raw_confirmation_token
     send_devise_notification(:confirmation_on_create_instructions, @raw_confirmation_token, {})
   end
-  
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)

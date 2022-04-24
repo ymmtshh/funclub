@@ -3,7 +3,6 @@
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">
         <%= @user.profile.name %>@<%= @user.username %>
-
       </h1>
       <%= link_to "アカウント", account_path %>
       <%= link_to "プロフィール", profile_path(@user.profile) %>

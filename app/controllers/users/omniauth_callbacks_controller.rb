@@ -45,11 +45,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"].except("extra"))
 
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
+      # sign_in_and_redirect @user, event: :authentication
+      sign_in(@user)
+      redirect_to edit_account_username_path(current_user.id)
     else
       @user.skip_confirmation!
       session["devise.user_attributes"] = @user.attributes
-      redirect_to new_user_registration_url
+      redirect_to new_user_registration_path(current_user.id)
     end
   end
 

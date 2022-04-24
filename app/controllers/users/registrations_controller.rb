@@ -15,12 +15,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     # super
     devise_create
+    # resource.build_profile
+    # resource.profile.user_id = @user.id
+    # resource.save!
   end
 
   def devise_create
     # ここでUser.new（と同等の操作）を行う
     build_resource(sign_up_params)
-    resource.build_profile
     # ここでUser.save（と同等の操作）を行う
     resource.save
     # ブロックが与えられたらresource(=User)を呼ぶ
@@ -78,7 +80,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :band])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
 
   def configure_account_update_params

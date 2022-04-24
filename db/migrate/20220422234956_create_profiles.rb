@@ -5,7 +5,6 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
         t.string :name
         t.text :introduction
         t.integer :prefecture_id
-        t.integer :city_id
         t.text :web
         t.string :avatar
         t.string :twitter

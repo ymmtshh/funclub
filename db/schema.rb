@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 2022_04_22_234956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cities", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "prefecture_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.string "comment_content"
     t.bigint "user_id", null: false
@@ -91,9 +83,11 @@ ActiveRecord::Schema.define(version: 2022_04_22_234956) do
 
   create_table "prefectures", force: :cascade do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_prefectures_on_name", unique: true
+    t.index ["slug"], name: "index_prefectures_on_slug", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -101,7 +95,6 @@ ActiveRecord::Schema.define(version: 2022_04_22_234956) do
     t.string "name"
     t.text "introduction"
     t.integer "prefecture_id"
-    t.integer "city_id"
     t.text "web"
     t.string "avatar"
     t.string "twitter"
@@ -166,7 +159,6 @@ ActiveRecord::Schema.define(version: 2022_04_22_234956) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "cities", "prefectures"
   add_foreign_key "comments", "schedules"
   add_foreign_key "comments", "users"
   add_foreign_key "contacts", "users"
