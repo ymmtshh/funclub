@@ -23,26 +23,28 @@
         <%= f.label :web, "web", :class => "form-label" %><br />
         <%= f.text_field :web, :class => "form-control" %><br />
 
-      <h2> SNS URL </h2>
-        <div class="form-group">
-          <%= f.label :twitter, 'Twitter', class: 'form-control' %>
-          <%= f.text_field :twitter, placeholder: "Optional", class: "form-control" %><br />
+    <h2> SNS URL </h2>
+    <%= f.fields_for :social_profile do |s| %>
+      <div class="form-group">
+        <%= s.label :twitter, 'Twitter', class: 'form-control' %>
+        <%= s.text_field :twitter, placeholder: "Optional", class: "form-control" %><br />
 
-          <%= f.label :instagram, 'Instagram', class: 'form-control' %>
-          <%= f.text_field :instagram, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.label :instagram, 'Instagram', class: 'form-control' %>
+        <%= s.text_field :instagram, placeholder: "Optional", class: "form-control" %><br />
 
-          <%= f.label :youtube, 'Youtube', class: 'form-control' %>
-          <%= f.text_field :youtube, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.label :youtube, 'Youtube', class: 'form-control' %>
+        <%= s.text_field :youtube, placeholder: "Optional", class: "form-control" %><br />
 
-          <%= f.label :line, 'Line Music', class: 'form-control' %>
-          <%= f.text_field :line, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.label :line, 'Line Music', class: 'form-control' %>
+        <%= s.text_field :line, placeholder: "Optional", class: "form-control" %><br />
 
-          <%= f.label :apple, 'Apple Music', class: 'form-control' %>
-          <%= f.text_field :apple, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.label :apple, 'Apple Music', class: 'form-control' %>
+        <%= s.text_field :apple, placeholder: "Optional", class: "form-control" %><br />
 
-          <%= f.label :spotify, 'Spotify', class: 'form-control' %>
-          <%= f.text_field :spotify, placeholder: "Optional", class: "form-control" %><br />
-        </div>
+        <%= s.label :spotify, 'Spotify', class: 'form-control' %>
+        <%= s.text_field :spotify, placeholder: "Optional", class: "form-control" %><br />
+      </div>
+    <% end %>
 
       <%= f.submit "送信", :class => "btn btn-primary" %><br />
       <%= link_to 'キャンセル' , profile_path(@profile), :class => "btn btn-light" %>

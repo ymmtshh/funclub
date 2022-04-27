@@ -24,7 +24,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       self.resource = resource_class.confirm_by_token(confirmation_token)
       set_flash_message :notice, :confirmed
       sign_in(resource_name, resource)
-      redirect_to edit_account_username_path(current_user.id)
+      redirect_to step1_user_signup_index_path(current_user.id)
     else
       render :action => "show"
     end

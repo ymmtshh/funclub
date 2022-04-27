@@ -46,10 +46,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       # sign_in_and_redirect @user, event: :authentication
-      sign_in(@user)
-      redirect_to edit_account_username_path(current_user.id)
+      if @user.profile.present?
+        sign_in(@user)
+        redirect_to root_path
+      else
+        sign_in(@user)
+        redirect_to step1_user_signup_index_path(current_user.id)
+      end
     else
-      @user.skip_confirmation!
       session["devise.user_attributes"] = @user.attributes
       redirect_to new_user_registration_path(current_user.id)
     end

@@ -4,56 +4,56 @@
   <div class = "sns-link">
     <ul class="profile-links">
 
-      <% if profile.twitter.present? %>
+      <% if @user.profile.social_profile.twitter.present? %>
         <li class="profile-link">
-          <%= link_to profile.twitter, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.twitter, target: :_blank do %>
             <i class="fab fa-twitter"></i>
           <% end %>
         </li>
       <% end %>
 
-      <% if profile.instagram.present? %>
+      <% if @user.profile.social_profile.instagram.present? %>
         <li class="profile-link">
-          <%= link_to profile.instagram, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.instagram, target: :_blank do %>
             <i class="fab fa-instagram"></i>
           <% end %>
         </li>
       <% end %>
 
-      <% if profile.youtube.present? %>
+      <% if @user.profile.social_profile.youtube.present? %>
         <li class="profile-link">
-          <%= link_to profile.youtube, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.youtube, target: :_blank do %>
             <i class="fab fa-youtube"></i>
           <% end %>
         </li>
       <% end %>
 
-      <% if profile.line.present? %>
+      <% if @user.profile.social_profile.line.present? %>
         <li class="profile-link">
-          <%= link_to profile.line, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.line, target: :_blank do %>
             <i class="fab fa-line"></i>
           <% end %>
         </li>
       <% end %>
 
-      <% if profile.apple.present? %>
+      <% if @user.profile.social_profile.apple.present? %>
         <li class="profile-link">
-          <%= link_to profile.apple, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.apple, target: :_blank do %>
             <i class="fa-solid fa-music"></i>
           <% end %>
         </li>
       <% end %>
 
-      <% if profile.spotify.present? %>
+      <% if @user.profile.social_profile.spotify.present? %>
         <li class="profile-link">
-          <%= link_to profile.spotify, target: :_blank do %>
+          <%= link_to @user.profile.social_profile.spotify, target: :_blank do %>
             <i class="fab fa-spotify"></i>
           <% end %>
         </li>
       <% end %>
 
       </ul>
-  </div>
+  </div> 
 
   自己紹介:<br>
   <%= profile.introduction %><br>

@@ -31,12 +31,15 @@ class ProfilesController < ApplicationController
             :avatar,
             :avatar_cache,
             :remove_avatar,
+            social_profile_attributes: [
+            :id,
             :twitter,
             :instagram,
             :youtube,
             :line,
             :apple,
-            :spotify,
+            :spotify
+            ]
         )
     end
 

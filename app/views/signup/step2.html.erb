@@ -1,0 +1,26 @@
+<%= form_for @profile, url: user_signup_index_path do |f| %>
+  <%= hidden_field_tag :current_step, 'step2' %>
+    <%= f.fields_for :social_profile do |s| %>
+      <div class="form-group">
+        <%= s.label :twitter, 'Twitter', class: 'form-control' %>
+        <%= s.text_field :twitter, placeholder: "Optional", class: "form-control" %><br />
+
+        <%= s.label :instagram, 'Instagram', class: 'form-control' %>
+        <%= s.text_field :instagram, placeholder: "Optional", class: "form-control" %><br />
+
+        <%= s.label :youtube, 'Youtube', class: 'form-control' %>
+        <%= s.text_field :youtube, placeholder: "Optional", class: "form-control" %><br />
+
+        <%= s.label :line, 'Line Music', class: 'form-control' %>
+        <%= s.text_field :line, placeholder: "Optional", class: "form-control" %><br />
+
+        <%= s.label :apple, 'Apple Music', class: 'form-control' %>
+        <%= s.text_field :apple, placeholder: "Optional", class: "form-control" %><br />
+
+        <%= s.label :spotify, 'Spotify', class: 'form-control' %>
+        <%= s.text_field :spotify, placeholder: "Optional", class: "form-control" %><br />
+      </div>
+    <% end %>
+  <%= f.submit '登録する' %>
+  <%= f.submit 'スキップする' %>
+<% end %>

@@ -40,9 +40,18 @@ Rails.application.routes.draw do
       get 'done', to: 'contacts#done', as: 'done'
     get :unsubscribe, on: :member
     patch :withdrawal, on: :member
+    
+    resources :signup do
+      collection do
+        get 'step1'
+        get 'step2'
+      end
+    end
   end
   
   resources :profiles, only: [:show, :edit]
+
+
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]

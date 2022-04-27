@@ -56,8 +56,8 @@ class User < ApplicationRecord
       # user.email = self.dummy_email(auth)
       user.password = Devise.friendly_token[0, 20]
       user.confirmed_at = Time.now.utc
-      user.confirmation_sent_at = Time.now.utc
-      user.confirmation_token = Devise.friendly_token[0, 20]
+      # user.confirmation_sent_at = Time.now.utc
+      # user.confirmation_token = Devise.friendly_token[0, 20]
       # user.build.profile
     end
   end

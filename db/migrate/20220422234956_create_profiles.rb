@@ -7,12 +7,6 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
         t.integer :prefecture_id
         t.text :web
         t.string :avatar
-        t.string :twitter
-        t.string :instagram
-        t.string :youtube
-        t.string :line
-        t.string :apple
-        t.string :spotify
   
         t.timestamps
     end
