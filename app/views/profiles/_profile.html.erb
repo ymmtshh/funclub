@@ -55,12 +55,13 @@
       </ul>
   </div> 
 
-  自己紹介:<br>
+  プロフィール:<br>
   <%= profile.introduction %><br>
 
-  場所:<br>
-  <%= @user.profile.prefecture.name %> 
-  <%= link_to prefecture_path(@user.profile.prefecture) %>
+  活動地域:<br>
+  <%= link_to prefecture_path(@user.profile.prefecture) do %>
+    <%= @user.profile.prefecture.name %><br>
+  <% end %>
 
   web:<br>
   <%= profile.web %><br>

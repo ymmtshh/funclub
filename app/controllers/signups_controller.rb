@@ -1,4 +1,4 @@
-class SignupController < ApplicationController
+class SignupsController < ApplicationController
   before_action :save_to_session, only: :step2
 
   def step1
@@ -47,7 +47,7 @@ class SignupController < ApplicationController
       # session[:id] = current_user.id # ログイン状態維持のためuser_idをsessionに保存
       redirect_to root_path
     else
-      render '/signup/step1'
+      render '/signups/step1'
     end
   end
 

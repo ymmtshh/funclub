@@ -1,4 +1,4 @@
-<%= form_for @profile, url: step2_user_signup_index_path, method: :get do |f| %>
+<%= form_for @profile, url: step2_user_signups_index_path, method: :get do |f| %>
   <%= hidden_field_tag :current_step, 'step1' %>
   <%= f.hidden_field :avatar_cache %>
   <%= f.label "プロフィール画像をアップロード" %><br>

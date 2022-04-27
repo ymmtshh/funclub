@@ -51,7 +51,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to root_path
       else
         sign_in(@user)
-        redirect_to step1_user_signup_index_path(current_user.id)
+        redirect_to step1_user_signups_index_path(current_user.id)
       end
     else
       session["devise.user_attributes"] = @user.attributes

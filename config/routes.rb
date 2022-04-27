@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     get :unsubscribe, on: :member
     patch :withdrawal, on: :member
     
-    resources :signup do
+    resources :signups do
       collection do
         get 'step1'
         get 'step2'

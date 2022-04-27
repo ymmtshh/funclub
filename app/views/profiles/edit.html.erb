@@ -14,10 +14,10 @@
         <%= f.label :name, "名前", :class => "form-label" %><br />
         <%= f.text_field :name, :class => "form-control" %><br />
 
-        <%= f.label :introduction, "自己紹介", :class => "form-label" %><br />
+        <%= f.label :introduction, "プロフィール", :class => "form-label" %><br />
         <%= f.text_area :introduction, :class => "form-control" %><br />
 
-      <%= f.label :prefecture_id, "活動拠点" %><br>
+      <%= f.label :prefecture_id, "活動地域" %><br>
       <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
 
         <%= f.label :web, "web", :class => "form-label" %><br />
