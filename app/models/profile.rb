@@ -7,8 +7,8 @@ class Profile < ApplicationRecord
   # accepts_nested_attributes_for :profile_genres, allow_destroy: true
   attr_accessor :genre_ids
 
-
   has_one :social_profile, dependent: :destroy
+  accepts_nested_attributes_for :social_profile
 
   mount_uploader :avatar, ProfileAvatarUploader
 

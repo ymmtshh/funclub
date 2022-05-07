@@ -20,18 +20,16 @@
         <%= f.label :prefecture_id, "活動地域" %><br>
         <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
 
-        <%
-=begin%>
- <%= f.label :genre, "ジャンル" %><br>
-        <%= f.collection_select :genre, Genre.all, :id, :name %><br> 
-<%
-=end%>
+        <%= f.label :genres, "ジャンル" %><br />
+        <%= collection_check_boxes(:profile, :genre_ids, Genre.all, :id, :name, include_hidden: false) do |g| %>
+          <%= g.label {g.check_box + g.text} %>
+        <% end %><br /> 
 
         <%= f.label :web, "web", :class => "form-label" %><br />
         <%= f.text_field :web, :class => "form-control" %><br />
 
     <h2> SNS URL </h2>
-    <%= f.fields_for :social_profile do |s| %>
+    <%= f.fields_for :social_profile, @profile.social_profile do |s| %>
       <div class="form-group">
         <%= s.label :twitter, 'Twitter', class: 'form-control' %>
         <%= s.text_field :twitter, value: @profile.social_profile.twitter, placeholder: "(URL)", class: "form-control" %><br />

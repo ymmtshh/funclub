@@ -19,7 +19,7 @@ class SignupsController < ApplicationController
   
   def step3
     # step2で入力した値をsessionに保存
-    session[:social_profile] = profile_params[:social_profile]
+    session[:social_profile_attributes] = profile_params[:social_profile_attributes]
     @user = User.find(current_user.id)
     @profile = Profile.new # 新規インスタンス作成
     @profile.profile_genres.build
@@ -35,7 +35,7 @@ class SignupsController < ApplicationController
       web: profile_params[:web],  # step2で入力した値をインスタンスに渡す
       avatar: profile_params[:avatar],  # step2で入力した値をインスタンスに渡す
     )
-    @profile.build_social_profile(session[:social_profile])
+    @profile.build_social_profile(session[:social_profile_attributes])
     if @profile.save!
       profile_params[:genre_ids].each do | profileg |
         genres = @profile.genres.pluck(:genre_id)
@@ -63,7 +63,7 @@ class SignupsController < ApplicationController
       :avatar,
       :avatar_cache,
       genre_ids: [],
-      social_profile: [
+      social_profile_attributes: [
         :id,
         :twitter,
         :instagram,
