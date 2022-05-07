@@ -17,8 +17,15 @@
         <%= f.label :introduction, "プロフィール", :class => "form-label" %><br />
         <%= f.text_area :introduction, :class => "form-control" %><br />
 
-      <%= f.label :prefecture_id, "活動地域" %><br>
-      <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
+        <%= f.label :prefecture_id, "活動地域" %><br>
+        <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
+
+        <%
+=begin%>
+ <%= f.label :genre, "ジャンル" %><br>
+        <%= f.collection_select :genre, Genre.all, :id, :name %><br> 
+<%
+=end%>
 
         <%= f.label :web, "web", :class => "form-label" %><br />
         <%= f.text_field :web, :class => "form-control" %><br />
@@ -27,22 +34,22 @@
     <%= f.fields_for :social_profile do |s| %>
       <div class="form-group">
         <%= s.label :twitter, 'Twitter', class: 'form-control' %>
-        <%= s.text_field :twitter, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :twitter, value: @profile.social_profile.twitter, placeholder: "(URL)", class: "form-control" %><br />
 
         <%= s.label :instagram, 'Instagram', class: 'form-control' %>
-        <%= s.text_field :instagram, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :instagram, value: @profile.social_profile.instagram, placeholder: "(URL)", class: "form-control" %><br />
 
         <%= s.label :youtube, 'Youtube', class: 'form-control' %>
-        <%= s.text_field :youtube, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :youtube, value: @profile.social_profile.youtube, placeholder: "(URL)", class: "form-control" %><br />
 
         <%= s.label :line, 'Line Music', class: 'form-control' %>
-        <%= s.text_field :line, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :line, value: @profile.social_profile.line, placeholder: "(URL)", class: "form-control" %><br />
 
         <%= s.label :apple, 'Apple Music', class: 'form-control' %>
-        <%= s.text_field :apple, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :apple, value: @profile.social_profile.apple, placeholder: "(URL)", class: "form-control" %><br />
 
         <%= s.label :spotify, 'Spotify', class: 'form-control' %>
-        <%= s.text_field :spotify, placeholder: "Optional", class: "form-control" %><br />
+        <%= s.text_field :spotify, value: @profile.social_profile.spotify, placeholder: "(URL)", class: "form-control" %><br />
       </div>
     <% end %>
 

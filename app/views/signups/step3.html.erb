@@ -1,0 +1,10 @@
+<%= form_for @profile, url: user_signups_path do |f| %>
+  <%= hidden_field_tag :current_step, 'step3' %> 
+  <%= f.label :genres %>
+  <%= collection_check_boxes(:profile, :genre_ids, Genre.all, :id, :name, include_hidden: false) do |g| %>
+    <%= g.label {g.check_box + g.text} %>
+  <% end %>
+
+  <%= f.submit '登録する' %>
+  <%= f.submit 'スキップする' %>
+<% end %>

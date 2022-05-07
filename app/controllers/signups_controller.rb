@@ -1,5 +1,4 @@
 class SignupsController < ApplicationController
-  before_action :save_to_session, only: :step2
 
   def step1
     @user = User.find(current_user.id)
@@ -7,28 +6,23 @@ class SignupsController < ApplicationController
   end
 
   def step2
-    @user = User.find(current_user.id)
-    @profile = Profile.new # 新規インスタンス作成
-    @profile.build_social_profile
-  end
-
-  def save_to_session
     # step1で入力した値をsessionに保存
     session[:name] = profile_params[:name]
     session[:introduction] = profile_params[:introduction]
     session[:prefecture_id] = profile_params[:prefecture_id]
     session[:web] = profile_params[:web]
     session[:avatar] = profile_params[:avatar]
-    @profile = Profile.new(
-      name: session[:name], # sessionに保存された値をインスタンスに渡す
-      introduction: session[:introduction],
-      prefecture_id: session[:prefecture_id],
-      web: profile_params[:web],  # step2で入力した値をインスタンスに渡す
-      avatar: profile_params[:avatar],  # step2で入力した値をインスタンスに渡す
-      avatar_cache: profile_params[:avatar_cache]  # step2で入力した値をインスタンスに渡す
-    )
-    # インスタンスにバリデーションをかけ、通らなければ1step目のページを再度表示する
-    # render '/signup/step1' unless @profile.valid?
+    @user = User.find(current_user.id)
+    @profile = Profile.new # 新規インスタンス作成
+    @profile.build_social_profile
+  end
+  
+  def step3
+    # step2で入力した値をsessionに保存
+    session[:social_profile] = profile_params[:social_profile]
+    @user = User.find(current_user.id)
+    @profile = Profile.new # 新規インスタンス作成
+    @profile.profile_genres.build
   end
 
   def create
@@ -40,11 +34,17 @@ class SignupsController < ApplicationController
       prefecture_id: session[:prefecture_id],
       web: profile_params[:web],  # step2で入力した値をインスタンスに渡す
       avatar: profile_params[:avatar],  # step2で入力した値をインスタンスに渡す
-      avatar_cache: profile_params[:avatar_cache]  # step2で入力した値をインスタンスに渡す
     )
-    @profile.build_social_profile(profile_params[:social_profile_attributes])
+    @profile.build_social_profile(session[:social_profile])
     if @profile.save!
-      # session[:id] = current_user.id # ログイン状態維持のためuser_idをsessionに保存
+      profile_params[:genre_ids].each do | profileg |
+        genres = @profile.genres.pluck(:genre_id)
+        unless genres.include?(profileg.to_i)
+          genre = ProfileGenre.new(genre_id: profileg)
+          genre.profile_id = @profile.id
+          genre.save
+        end
+      end
       redirect_to root_path
     else
       render '/signups/step1'
@@ -62,7 +62,8 @@ class SignupsController < ApplicationController
       :web,
       :avatar,
       :avatar_cache,
-      social_profile_attributes: [
+      genre_ids: [],
+      social_profile: [
         :id,
         :twitter,
         :instagram,

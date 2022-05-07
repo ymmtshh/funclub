@@ -63,6 +63,12 @@
     <%= @user.profile.prefecture.name %><br>
   <% end %>
 
+
+  ジャンル:<br>
+  <% @user.profile.genres.each do |g| %>
+    <%= g.name %>
+  <% end %> <br>
+
   web:<br>
   <%= profile.web %><br>
 

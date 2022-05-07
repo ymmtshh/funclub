@@ -1,4 +1,4 @@
-<%= form_for @profile, url: step2_user_signups_index_path, method: :get do |f| %>
+<%= form_for @profile, url: step2_user_signups_path, method: :get do |f| %>
   <%= hidden_field_tag :current_step, 'step1' %>
   <%= f.hidden_field :avatar_cache %>
   <%= f.label "プロフィール画像をアップロード" %><br>
@@ -11,7 +11,16 @@
   <%= f.text_area :introduction, :class => "form-control" %><br />
 
   <%= f.label :prefecture_id, "活動拠点" %><br>
-  <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %><br>
+  <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "選択してください"} %><br>
+
+  <%
+=begin%>
+ <%= f.label :genres %><br>
+  <%= collection_check_boxes(:genre, :genre_ids, Genre.all, :id, :name) do |g| %>
+    <% g.label { g.check_box + g.text } %>
+  <% end %> 
+<%
+=end%>
 
   <%= f.label :web, "ホームページ", :class => "form-label" %><br />
   <%= f.text_field :web, :class => "form-control" %><br />

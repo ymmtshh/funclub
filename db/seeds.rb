@@ -19,89 +19,110 @@
 #   City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
 # end
 
-Prefecture.create(name: '北海道', slug: 'hokkaido')
-Prefecture.create(name: '青森県', slug: 'aomori')
-Prefecture.create(name: '秋田県', slug: 'akita')
-Prefecture.create(name: '岩手県', slug: 'iwate')
-Prefecture.create(name: '宮城県', slug: 'miyagi')
-Prefecture.create(name: '山形県', slug: 'yamagata')
-Prefecture.create(name: '福島県', slug: 'fukushima')
-Prefecture.create(name: '栃木県', slug: 'tochigi')
-Prefecture.create(name: '茨城県', slug: 'ibaraki')
-Prefecture.create(name: '群馬県', slug: 'gunma')
-Prefecture.create(name: '埼玉県', slug: 'saitama')
-Prefecture.create(name: '千葉県', slug: 'chiba')
-Prefecture.create(name: '東京都', slug: 'tokyo')
-Prefecture.create(name: '神奈川県', slug: 'kanagawa')
-Prefecture.create(name: '新潟県', slug: 'nigata')
-Prefecture.create(name: '富山県', slug: 'toyama')
-Prefecture.create(name: '石川県', slug: 'ishikawa')
-Prefecture.create(name: '福井県', slug: 'fukui')
-Prefecture.create(name: '山梨県', slug: 'yamanashi')
-Prefecture.create(name: '長野県', slug: 'nagano')
-Prefecture.create(name: '岐阜県', slug: 'gifu')
-Prefecture.create(name: '静岡県', slug: 'shizuoka')
-Prefecture.create(name: '愛知県', slug: 'aichi')
-Prefecture.create(name: '三重県', slug: 'mie')
-Prefecture.create(name: '滋賀県', slug: 'shiga')
-Prefecture.create(name: '京都府', slug: 'kyoto')
-Prefecture.create(name: '大阪府', slug: 'osaka')
-Prefecture.create(name: '兵庫県', slug: 'hyougo')
-Prefecture.create(name: '奈良県', slug: 'nara')
-Prefecture.create(name: '和歌山県', slug: 'wakayama')
-Prefecture.create(name: '鳥取県', slug: 'tottori')
-Prefecture.create(name: '島根県', slug: 'simane')
-Prefecture.create(name: '岡山県', slug: 'okayama')
-Prefecture.create(name: '広島県', slug: 'hiroshima')
-Prefecture.create(name: '山口県', slug: 'yamaguchi')
-Prefecture.create(name: '徳島県', slug: 'tokushima')
-Prefecture.create(name: '香川県', slug: 'kagawa')
-Prefecture.create(name: '愛媛県', slug: 'ehime')
-Prefecture.create(name: '高知県', slug: 'kouchi')
-Prefecture.create(name: '福岡県', slug: 'fukuoka')
-Prefecture.create(name: '佐賀県', slug: 'saga')
-Prefecture.create(name: '長崎県', slug: 'nagasaki')
-Prefecture.create(name: '熊本県', slug: 'kumamoto')
-Prefecture.create(name: '大分県', slug: 'oita')
-Prefecture.create(name: '宮崎県', slug: 'miyazaki')
-Prefecture.create(name: '鹿児島県', slug: 'kagoshima')
-Prefecture.create(name: '沖縄県', slug: 'okinawa')
+Prefecture.create([
+  { name: '北海道', slug: 'hokkaido' },
+  { name: '青森県', slug: 'aomori' },
+  { name: '秋田県', slug: 'akita' },
+  { name: '岩手県', slug: 'iwate' },
+  { name: '宮城県', slug: 'miyagi' },
+  { name: '山形県', slug: 'yamagata' },
+  { name: '福島県', slug: 'fukushima' },
+  { name: '栃木県', slug: 'tochigi' },
+  { name: '茨城県', slug: 'ibaraki' },
+  { name: '群馬県', slug: 'gunma' },
+  { name: '埼玉県', slug: 'saitama' },
+  { name: '千葉県', slug: 'chiba' },
+  { name: '東京都', slug: 'tokyo' },
+  { name: '神奈川県', slug: 'kanagawa' },
+  { name: '新潟県', slug: 'nigata' },
+  { name: '富山県', slug: 'toyama' },
+  { name: '石川県', slug: 'ishikawa' },
+  { name: '福井県', slug: 'fukui' },
+  { name: '山梨県', slug: 'yamanashi' },
+  { name: '長野県', slug: 'nagano' },
+  { name: '岐阜県', slug: 'gifu' },
+  { name: '静岡県', slug: 'shizuoka' },
+  { name: '愛知県', slug: 'aichi' },
+  { name: '三重県', slug: 'mie' },
+  { name: '滋賀県', slug: 'shiga' },
+  { name: '京都府', slug: 'kyoto' },
+  { name: '大阪府', slug: 'osaka' },
+  { name: '兵庫県', slug: 'hyougo' },
+  { name: '奈良県', slug: 'nara' },
+  { name: '和歌山県', slug: 'wakayama' },
+  { name: '鳥取県', slug: 'tottori' },
+  { name: '島根県', slug: 'simane' },
+  { name: '岡山県', slug: 'okayama' },
+  { name: '広島県', slug: 'hiroshima' },
+  { name: '山口県', slug: 'yamaguchi' },
+  { name: '徳島県', slug: 'tokushima' },
+  { name: '香川県', slug: 'kagawa' },
+  { name: '愛媛県', slug: 'ehime' },
+  { name: '高知県', slug: 'kouchi' },
+  { name: '福岡県', slug: 'fukuoka' },
+  { name: '佐賀県', slug: 'saga' },
+  { name: '長崎県', slug: 'nagasaki' },
+  { name: '熊本県', slug: 'kumamoto' },
+  { name: '大分県', slug: 'oita' },
+  { name: '宮崎県', slug: 'miyazaki' },
+  { name: '鹿児島県', slug: 'kagoshima' },
+  { name: '沖縄県', slug: 'okinawa' }  
+])
 
-Genres.create(name: 'アカペラ', slug: 'acappella')
-Genres.create(name: 'アンビエント', slug: 'ambient')
-Genres.create(name: 'ニューエイジ', slug: 'newage')
-Genres.create(name: 'フォーク', slug: 'folk')
-Genres.create(name: 'ソウル', slug: 'soul')
-Genres.create(name: 'ブルース', slug: 'blues')
-Genres.create(name: 'チルウェイヴ', slug: 'chillwave')
-Genres.create(name: 'プログレッシブロック', slug: 'progressive')
-Genres.create(name: 'サイケデリックロック', slug: 'psychedelic')
-Genres.create(name: 'EDM', slug: 'edm')
-Genres.create(name: 'エレクトロポップ', slug: 'electropop')
-Genres.create(name: 'シティポップ', slug: 'citypop')
-Genres.create(name: 'カントリー', slug: 'country')
-Genres.create(name: 'レゲエ', slug: 'reggae')
-Genres.create(name: 'テクノ', slug: 'techno')
-Genres.create(name: 'ミクスチャーロック', slug: 'mixturerock')
-Genres.create(name: 'グランジ', slug: 'grunge')
-Genres.create(name: 'ガレージロック', slug: 'garage')
-Genres.create(name: 'ニューウェイヴ', slug: 'newwave')
-Genres.create(name: 'パンクロック', slug: 'punk')
-Genres.create(name: 'レゲトン', slug: 'reggaeton')
-Genres.create(name: 'スカ', slug: 'ska')
-Genres.create(name: 'ドラムンベース', slug: 'drum_n_bass')
-Genres.create(name: 'ダブステップ', slug: 'dubstep')
-Genres.create(name: 'エモ', slug: 'emo')
-Genres.create(name: 'スクリーモ', slug: 'screamo')
-Genres.create(name: 'ハードコア', slug: 'hardcore')
-Genres.create(name: 'ハードロック', slug: 'hardrock')
-Genres.create(name: 'ユーロビート', slug: 'eurobeat')
-Genres.create(name: 'トランス', slug: 'trance')
-Genres.create(name: 'ハウス', slug: 'house')
-Genres.create(name: 'トラップ', slug: 'trap')
-Genres.create(name: 'ヒップホップ', slug: 'hiphop')
-Genres.create(name: 'メロコア', slug: 'melodious_hardcore')
-Genres.create(name: 'ヘヴィメタル', slug: 'heavymetal')
-Genres.create(name: 'スラッシュメタル', slug: 'thrashmetal')
-Genres.create(name: 'ラウドロック', slug: 'loudrock')
-Genres.create(name: 'ラウドロック', slug: 'loudrock')
+
+
+Genre.create([
+  { name: 'アカペラ', slug: 'acappella' },
+  { name: 'アシッドジャズ', slug: 'acid_jazz' },
+  { name: 'アンビエント', slug: 'ambient' },
+  { name: 'インストゥメンタル', slug: 'instrumental' },
+  { name: 'エレクトロポップ', slug: 'electro_pop' },
+  { name: 'エモ', slug: 'emo' },
+  { name: 'オルタナティヴロック', slug: 'alternative' },
+  { name: 'ガレージロック', slug: 'garage' },
+  { name: 'カントリー', slug: 'country' },
+  { name: 'グランジ', slug: 'grunge' },
+  { name: 'サイケデリックロック', slug: 'psychedelic' },
+  { name: 'シティポップ', slug: 'city_pop' },
+  { name: 'ジャズ', slug: 'jazz' },
+  { name: 'シューゲイザー', slug: 'shoegazer' },
+  { name: 'シンセポップ', slug: 'synth_pop' },
+  { name: 'スカ', slug: 'ska' },
+  { name: 'スクリーモ', slug: 'screamo' },
+  { name: 'スラッシュメタル', slug: 'thrash_metal' },
+  { name: 'ソウル', slug: 'soul' },
+  { name: 'ダブステップ', slug: 'dubstep' },
+  { name: 'チルウェイヴ', slug: 'chillwave' },
+  { name: 'ディスコ', slug: 'disco' },
+  { name: 'テクノ', slug: 'techno' },
+  { name: 'テクノポップ', slug: 'techno_pop' },
+  { name: 'トラップ', slug: 'trap' },
+  { name: 'ドラムンベース', slug: 'drum_n_bass' },
+  { name: 'トランス', slug: 'trance' },
+  { name: 'ドリームポップ', slug: 'dream_pop },' },
+  { name: 'ニューウェイヴ', slug: 'newwave' },
+  { name: 'ニューエイジ', slug: 'newage' },
+  { name: 'ハウス', slug: 'house' },
+  { name: 'ハードコア', slug: 'hardcore' },
+  { name: 'ハードロック', slug: 'hard_rock' },
+  { name: 'パワーポップ', slug: 'power_pop' },
+  { name: 'パンクロック', slug: 'punk' },
+  { name: 'ヒップホップ', slug: 'hiphop' },
+  { name: 'ファンク', slug: 'funk' },
+  { name: 'フォーク', slug: 'folk' },
+  { name: 'フォークロック', slug: 'folk_rock' },
+  { name: 'フュージョン', slug: 'fusion' },
+  { name: 'ブルース', slug: 'blues' },
+  { name: 'プログレッシブメタル', slug: 'progressive_metal' },
+  { name: 'プログレッシブロック', slug: 'progressive_rock' },
+  { name: 'ヘヴィメタル', slug: 'heavy_metal' },
+  { name: 'ボサノヴァ', slug: 'bossanova' },
+  { name: 'メロコア', slug: 'melodious_hardcore' },
+  { name: 'ミクスチャーロック', slug: 'mixture_rock' },
+  { name: 'ユーロビート', slug: 'eurobeat' },
+  { name: 'ラウドロック', slug: 'loud_rock' },
+  { name: 'R&B', slug: 'rhythm_and_blues' },
+  { name: 'レゲエ', slug: 'reggae' },
+  { name: 'レゲトン', slug: 'reggaeton' },
+  { name: 'ロカビリー', slug: 'rockabilly' }
+])

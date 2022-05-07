@@ -5,6 +5,12 @@ class ProfilesController < ApplicationController
     def show
     end
 
+    def new
+    end
+
+    def create
+    end
+
     def edit
     end
 
@@ -31,7 +37,8 @@ class ProfilesController < ApplicationController
             :avatar,
             :avatar_cache,
             :remove_avatar,
-            social_profile_attributes: [
+            :genre_ida,
+            social_profile: [
             :id,
             :twitter,
             :instagram,
