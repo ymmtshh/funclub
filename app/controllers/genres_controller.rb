@@ -5,7 +5,7 @@ class GenresController < ApplicationController
   end
 
   def show
-    Genre.find(slug: params[:id])
+    @genre = Genre.find_by(slug: params[:id])
   end
 
 end

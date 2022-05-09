@@ -5,7 +5,9 @@ class PrefecturesController < ApplicationController
   end
 
   def show
-    Prefecture.find(slug: params[:id])
+    @prefecture = Prefecture.find_by(slug: params[:id])
+    profile = Profile.where(slug: params[:id])
+    @user = @user.profile
   end
 
 end
