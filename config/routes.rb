@@ -52,7 +52,6 @@ Rails.application.routes.draw do
   
   resources :profiles, only: [:show, :edit]
 
-
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]

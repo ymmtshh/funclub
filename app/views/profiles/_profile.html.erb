@@ -65,9 +65,9 @@
 
 
   ジャンル:<br>
-  <% @user.profile.genres.each do |g| %>
-    <%= link_to genre_path(g)  do %>
-      <%= g.name %>
+  <% @user.profile.genres.each do |genre| %>
+    <%= link_to genre_path(genre)  do %>
+      <%= genre.name %>
     <% end %>
   <% end %><br>
 

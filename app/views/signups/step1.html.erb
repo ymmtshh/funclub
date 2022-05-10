@@ -13,15 +13,6 @@
   <%= f.label :prefecture_id, "活動拠点" %><br>
   <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "選択してください"} %><br>
 
-  <%
-=begin%>
- <%= f.label :genres %><br>
-  <%= collection_check_boxes(:genre, :genre_ids, Genre.all, :id, :name) do |g| %>
-    <% g.label { g.check_box + g.text } %>
-  <% end %> 
-<%
-=end%>
-
   <%= f.label :web, "ホームページ", :class => "form-label" %><br />
   <%= f.text_field :web, :class => "form-control" %><br />
 

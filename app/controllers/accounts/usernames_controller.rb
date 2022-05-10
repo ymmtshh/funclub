@@ -6,7 +6,11 @@ class Accounts::UsernamesController < ApplicationController
 
     def update
         if current_user.update(user_params)
-            redirect_to account_path, notice: 'ユーザーネームを変更しました'
+            if current_user.profile.present?
+                redirect_to account_path, notice: 'ユーザーネームを変更しました'
+            else
+                redirect_to step1_user_signups_path(current_user.id)
+            end
         else
             redirect_to edit_account_username_path, notice: 'ユーザーネームを変更できませんでした'
         end
@@ -20,7 +24,7 @@ class Accounts::UsernamesController < ApplicationController
     def user_params
         params.require(:user).permit(
             :username,
-            :email
+            :band
         )
     end
 end
