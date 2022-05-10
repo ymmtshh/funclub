@@ -1,10 +1,10 @@
 <h1>ユーザー検索</h1>
   <tbody>
-    <% @genre.each do |g| %>
+    <% @genre.each do |genre| %>
       <tr>
         <td>
-          <%= link_to genre_path(g) do %>
-            <%= g.name %>
+          <%= link_to genre_path(genre) do %>
+            <%= genre.name %>
           <% end %>
         </td>
       </tr>

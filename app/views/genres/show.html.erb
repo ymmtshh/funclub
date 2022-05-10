@@ -1,6 +1,8 @@
 <%= @genre.name %>のユーザー一覧
-  <% @users.each do |user| %>
-    <%= link_to user_path(user) do %>
-      <%= user.username %>
+  <% @genres.each do |g| %>
+    <% g.profiles.each do |p| %>
+        <%= link_to user_path(p) do %><br>
+          <%= p.name %>
+        <% end %>
     <% end %>
   <% end %>

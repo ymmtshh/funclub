@@ -1,1 +1,8 @@
 <%= @prefecture.name %>のユーザー一覧
+  <% @prefectures.each do |prefecture| %>
+    <% prefecture.profiles.each do |profile| %>
+        <%= link_to user_path(profile) do %><br>
+          <%= profile.name %>
+        <% end %>
+    <% end %>
+  <% end %>

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
 
   has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
   has_many :schedules, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :discs, dependent: :destroy

@@ -1,10 +1,10 @@
 <h1>ユーザー検索</h1>
   <tbody>
-    <% @prefecture.each do |pr| %>
+    <% @prefecture.each do |prefecture| %>
       <tr>
         <td>
-          <%= link_to prefecture_path(pr) do %>
-            <%= pr.name %>
+          <%= link_to prefecture_path(prefecture) do %>
+            <%= prefecture.name %>
           <% end %>
         </td>
       </tr>
