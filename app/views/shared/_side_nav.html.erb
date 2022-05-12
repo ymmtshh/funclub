@@ -1,0 +1,8 @@
+<% @prefectures.each do |prefecture| %>
+  <%=link_to prefecture.name, search_search_path('search[value]': prefecture.id, 'search[how]': "match_prefecture"), class:"nav-link" %>
+<% end %>
+
+----------
+<% @genres.each do |genre| %>
+  <%=link_to genre.name, search_search_path('search[value]': genre.id, 'search[how]': "match_genre") , class:"nav-link" %>
+<% end %>

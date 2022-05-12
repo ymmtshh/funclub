@@ -50,8 +50,9 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :profiles, only: [:show, :edit]
+  get 'search', to: 'searches#search'
 
+  resources :profiles, only: [:show, :edit]
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
   resources :goods, only: [:show, :edit, :destroy]
@@ -59,7 +60,6 @@ Rails.application.routes.draw do
   resources :contacts, only: [:show, :create, :destroy]
   resources :prefectures, only: [:index, :show]
   resources :genres, only: [:index, :show]
-
   resources :schedules, only: [:show, :edit, :destroy] do
     resources :comments, only: [:create]  
   end

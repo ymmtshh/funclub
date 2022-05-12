@@ -12,4 +12,25 @@ class Profile < ApplicationRecord
 
   mount_uploader :avatar, ProfileAvatarUploader
 
+  def self.search(search)
+    if search
+      patterns = search.split(/[ , ]/)
+      sql_name = ''
+      patterns.each do | pattern |
+        sql_name += ' and ' unless sql_name.blank?
+        sql_name += " name like '%#{Profile.sanitize_sql_like(pattern)}%' "
+      end
+      sql = "select * from profiles where #{sql_name} order by id desc"
+      profile_ids = Profile.find_by_sql(sql)
+      ids = []
+      profile_ids.each do |qi|
+        ids.push(qi.id)
+      end
+      where(:id => ids)
+    else
+      Profile.all
+    end
+  end
+  
+
 end
