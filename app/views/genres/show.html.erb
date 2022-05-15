@@ -1,4 +1,4 @@
-<%= @genre.name %>のユーザー一覧
+<%= @genre.name %>の検索結果
   <% @genres.each do |g| %>
     <% g.profiles.each do |p| %>
         <%= link_to user_path(p) do %><br>

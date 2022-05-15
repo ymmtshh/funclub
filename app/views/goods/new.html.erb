@@ -1,4 +1,37 @@
 <h1>GOODSを作成</h1>
 
-<%= render partial: "form", locals: { user: @user, good: @good} %>
-<%= link_to 'キャンセル' , goods_user_path(@user), :class => "btn btn-light" %>
+<%
+=begin%>
+ <%= render partial: "form", locals: { user: @user, good: @good} %> 
+<%
+=end%>
+<%= form_with(model: [@user, @good], local: true) do |f| %>
+
+  <div class="form-group">
+    <% if @good.image? %>
+      <%= image_tag @good.image.to_s, :id => "avatar-prev" %><br>
+      <label><%= f.check_box :remove_image %> 画像を削除する</label>
+    <% else %>
+      <%= f.hidden_field :image_cache %>
+      <%= f.label "画像をアップロード" %><br>
+      <%= f.file_field :image, :id => "avatar-img", :class => "form-control-file" %><br />
+    <% end %><br>
+
+    <%= f.label :title, "商品名", :class => "form-label" %><br />
+    <%= f.text_field :title, :class => "form-control" %><br />
+
+    <%= f.label :price, "価格", :class => "form-label" %><br />
+    <%= f.text_field :price, :class => "form-control" %><br />
+
+    <%= f.label :goods_category_id, "商品カテゴリー" %><br>
+    <%= f.collection_select :goods_category_id, GoodsCategory.all, :id, :name, {prompt: "選択してください"} %><br>
+
+    <%= f.label :body, "詳細", :class => "form-label" %><br />
+    <%= f.text_area :body, :class => "form-control" %><br />
+
+    <%= f.submit "送信", :class => "btn btn-primary" %><br />
+  </div>
+  
+<% end %>
+
+  <%= link_to 'キャンセル' , user_goods_path(@user.id), :class => "btn btn-light" %> 

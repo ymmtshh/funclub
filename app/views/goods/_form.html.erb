@@ -13,11 +13,14 @@
     <%= f.label :title, "商品名", :class => "form-label" %><br />
     <%= f.text_field :title, :class => "form-control" %><br />
 
-    <%= f.label :body, "詳細", :class => "form-label" %><br />
-    <%= f.text_area :body, :class => "form-control" %><br />
-
     <%= f.label :price, "価格", :class => "form-label" %><br />
     <%= f.text_field :price, :class => "form-control" %><br />
+
+    <%= f.label :goods_category_id, "商品カテゴリー" %><br>
+    <%= f.collection_select :goods_category_id, GoodsCategory.all, :id, :name, {prompt: "選択してください"} %><br>
+
+    <%= f.label :body, "詳細", :class => "form-label" %><br />
+    <%= f.text_area :body, :class => "form-control" %><br />
 
     <%= f.submit "送信", :class => "btn btn-primary" %><br />
   </div>

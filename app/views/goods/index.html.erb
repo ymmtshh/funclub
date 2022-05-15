@@ -1,6 +1,7 @@
 <%= @user.profile.name %>さんのGOODS一覧<br>
+
 <% @goods.each do |good| %>
-  <%= link_to good_path(good) do %>
+  <%= link_to user_good_path(@user, good) do %>
   <%= good.title %><br>
   <% end %>
 <% end %>

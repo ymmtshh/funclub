@@ -1,9 +1,11 @@
-<p>NEWS詳細</p>
+<p>GOODS詳細</p>
 
 商品名<br>
 <%= @good.title%><br>
 価格<br>
 <%= @good.price%><br>
+商品カテゴリー :<br>
+  <%= @good.goods_category.name %><br>
 詳細<br>
 <%=simple_format @good.body%><br>
 
@@ -11,9 +13,9 @@
     <%= image_tag @good.image.to_s %>
 <% end %>
 
-<%= link_to "一覧へ戻る", goods_user_path(@good.user_id) %>
+<%= link_to "一覧へ戻る", user_goods_path(@user.id) %>
 
 <% if @good.user_id == current_user.id %>
-  <%= link_to "編集", edit_good_path(@good) %>
-  <%= link_to "削除", good_path(@good), method: :delete, data: {confirm: "削除しますか？"} %>
-<% end %>
+  <%= link_to "編集", edit_user_good_path(@user, @good) %>
+  <%= link_to "削除", user_good_path(@user, @good), method: :delete, data: {confirm: "削除しますか？"} %>
+<% end %> 

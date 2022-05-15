@@ -29,8 +29,8 @@ Rails.application.routes.draw do
       resources :posts, only: [:new, :create, :update]
     get :discs, on: :member
       resources :discs, only: [:new, :create, :update]
-    get :goods, on: :member
-      resources :goods, only: [:new, :create, :update]
+    # get :goods, on: :member
+      resources :goods
     get :movies, on: :member
       resources :movies, only: [:new, :create, :update]
     get :contacts, on: :member  
@@ -51,11 +51,12 @@ Rails.application.routes.draw do
   end
   
   get 'search', to: 'searches#search'
+  get 'goods_search', to: 'goods#search'
 
   resources :profiles, only: [:show, :edit]
   resources :posts, only: [:show, :edit, :destroy]
   resources :discs, only: [:show, :edit, :destroy]
-  resources :goods, only: [:show, :edit, :destroy]
+
   resources :movies, only: [:show, :edit, :destroy]
   resources :contacts, only: [:show, :create, :destroy]
   resources :prefectures, only: [:index, :show]

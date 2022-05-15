@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_150510) do
+ActiveRecord::Schema.define(version: 2022_05_14_141411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_150510) do
 
   create_table "goods", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.integer "goods_category_id"
     t.string "title"
     t.string "price"
     t.text "body"
@@ -67,6 +68,15 @@ ActiveRecord::Schema.define(version: 2022_04_28_150510) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_goods_on_user_id"
+  end
+
+  create_table "goods_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_goods_categories_on_name", unique: true
+    t.index ["slug"], name: "index_goods_categories_on_slug", unique: true
   end
 
   create_table "movies", force: :cascade do |t|

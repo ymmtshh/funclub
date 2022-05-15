@@ -69,8 +69,6 @@ Prefecture.create([
   { name: '沖縄県', slug: 'okinawa' }  
 ])
 
-
-
 Genre.create([
   { name: 'アカペラ', slug: 'acappella' },
   { name: 'アシッドジャズ', slug: 'acid_jazz' },
@@ -125,4 +123,12 @@ Genre.create([
   { name: 'レゲエ', slug: 'reggae' },
   { name: 'レゲトン', slug: 'reggaeton' },
   { name: 'ロカビリー', slug: 'rockabilly' }
+])
+
+GoodsCategory.create([
+  { name: 'Tシャツ/ロングTシャツ', slug: 'shirt' },
+  { name: 'パーカー/スウェット', slug: 'parka_sweatshirt' },
+  { name: 'タオル', slug: 'towel' },
+  { name: 'バッグ', slug: 'bag' },
+  { name: 'その他', slug: 'others' }
 ])

@@ -41,10 +41,6 @@ class UsersController < ApplicationController
     @discs = @user.discs
   end
 
-  def goods
-    @goods = @user.goods
-  end
-
   def movies
     @movies = @user.movies
   end

@@ -1,4 +1,5 @@
 <h1>GOODSを編集</h1>
 
 <%= render partial: "form", locals: { user: @good.user, good: @good} %>
-<%= link_to 'キャンセル' , good_path(@good), :class => "btn btn-light" %>
+
+<%= link_to 'キャンセル' , user_good_path(@good.user, @good), :class => "btn btn-light" %>
