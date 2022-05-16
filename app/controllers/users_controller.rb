@@ -28,10 +28,6 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
-  def schedules
-    @schedules = @user.schedules
-  end
-
   def contacts
     @contacts = @user.contacts
     # redirect_to  controller: :contacts, action: :new
@@ -45,7 +41,6 @@ class UsersController < ApplicationController
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
   end
-
 
   private
   def find_user

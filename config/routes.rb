@@ -22,21 +22,27 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
+
     resources :profiles, only: [:update]
-    get :schedules,on: :member
-      resources :schedules, only: [:new, :create, :update]
-      resources :posts
-      resources :discs
-      resources :goods
-      resources :movies
+
+    resources :schedules do
+      resources :comments, only: [:create] 
+    end
+    
+    resources :posts
+    resources :discs
+    resources :goods
+    resources :movies
+    
     get :contacts, on: :member  
       resources :contacts, only: [:new]
       post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
       post 'contacts/back', to: 'contacts#back', as: 'back'
       get 'done', to: 'contacts#done', as: 'done'
-    get :unsubscribe, on: :member
-    patch :withdrawal, on: :member
     
+      get :unsubscribe, on: :member
+    patch :withdrawal, on: :member
+
     resources :signups do
       collection do
         get 'step1'
@@ -53,9 +59,6 @@ Rails.application.routes.draw do
   resources :contacts, only: [:show, :create, :destroy]
   resources :prefectures, only: [:index, :show]
   resources :genres, only: [:index, :show]
-  resources :schedules, only: [:show, :edit, :destroy] do
-    resources :comments, only: [:create]  
-  end
 
   root 'home#index'
 end

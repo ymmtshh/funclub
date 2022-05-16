@@ -1,7 +1,13 @@
 class SchedulesController < ApplicationController
   before_action :find_schedule, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @user = User.find(params[:user_id])
+    @schedules = @user.schedules.order(created_at: :desc).all
+  end
+
   def show
+    @user = User.find(params[:user_id])
     @comments = @schedule.comments.includes(:user).all
     @comment  = @schedule.comments.build(user_id: current_user.id) if current_user
   end
@@ -18,7 +24,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     @schedule.user_id = params[:user_id]
     if @schedule.save
-      redirect_to schedule_path(@schedule), notice: "スケジュールを作成しました。"
+      redirect_to user_schedules_path(current_user.id), notice: "スケジュールを作成しました。"
     else
       render :new
     end
@@ -26,7 +32,7 @@ class SchedulesController < ApplicationController
 
   def update
     if @schedule.update(schedule_params)
-      redirect_to schedule_path(@schedule), notice: "スケジュールを更新しました。"
+      redirect_to user_schedule_path(current_user.id, @schedule), notice: "スケジュールを更新しました。"
     else
       render :edit
     end
@@ -34,9 +40,9 @@ class SchedulesController < ApplicationController
 
   def destroy
     if @schedule.destroy
-      redirect_to schedules_user_path(@schedule.user_id), notice: "スケジュールを削除しました。"
+      redirect_to user_schedules_path(current_user.id), notice: "スケジュールを削除しました。"
     else
-      redirect_to schedules_user_path(@schedule.user_id), alert: "スケジュールを削除できませんでした。"
+      redirect_to user_schedules_path(current_user.id), alert: "スケジュールを削除できませんでした。"
     end
   end
 

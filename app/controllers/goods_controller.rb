@@ -1,7 +1,6 @@
 class GoodsController < ApplicationController
   before_action :find_good, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @user = User.find(params[:user_id])
     @goods = @user.goods.order(created_at: :desc).all

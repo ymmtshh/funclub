@@ -1,4 +1,4 @@
 <h1>スケジュールを編集</h1>
 
 <%= render partial: "form", locals: { user: @schedule.user, schedule: @schedule} %>
-<%= link_to 'キャンセル' , schedule_path(@schedule), :class => "btn btn-light" %>
+<%= link_to 'キャンセル' , user_schedule_path(@schedule.user, @schedule), :class => "btn btn-light" %>

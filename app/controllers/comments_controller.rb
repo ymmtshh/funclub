@@ -5,12 +5,12 @@ class CommentsController < ApplicationController
       comment = current_user.comments.new(comment_params)
       comment.schedule_id = schedule.id
       comment.save
-      redirect_to schedule_path(schedule)
+      redirect_to user_schedule_path(schedule.user, schedule)
     end
   
     def destroy
       Comment.find_by(id: params[:id], schedule_id: params[:schedule_id]).destroy
-      redirect_to schedule_path(params[:schedule_id])
+      redirect_to user_schedule_path(params[:schedule_id])
     end
   
     private

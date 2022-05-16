@@ -15,8 +15,9 @@ OPEN
     <%= image_tag @schedule.image.to_s %>
 <% end %>
 
+
   <div class="comments ml-5 mt-5">
-  <%= form_with(model:[@schedule, @comment], local: true) do |f| %>
+  <%= form_with(model:[@user, @schedule, @comment], local: true) do |f| %>
     <%= f.text_area :comment_content, :size=>"60x3",placeholder: "コメントする" %>
     <%= f.submit "送信する", class: "btn btn-success mb-4" %>
   <% end %>
@@ -26,11 +27,12 @@ OPEN
       <%= comment.created_at.strftime('%Y/%m/%d') %>
       <%= comment.user.username %>
       <%= comment.comment_content %>
-    <% end %><br>
+    <% end %><br> 
 
-<%= link_to "一覧へ戻る", schedules_user_path(@schedule.user_id) %>
+
+<%= link_to "一覧へ戻る", user_schedules_path(@user.id) %>
 
 <% if @schedule.user_id == current_user.id %>
-  <%= link_to "編集", edit_schedule_path(@schedule) %>
-  <%= link_to "削除", schedule_path(@schedule), method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= link_to "編集", edit_user_schedule_path(@user, @schedule) %>
+  <%= link_to "削除", user_schedule_path(@user, @schedule), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>
