@@ -18,7 +18,6 @@ class UsersController < ApplicationController
     @users = User.find(params[:id])
   end
 
-
   def followings
     user = User.find(params[:id])
     @users = user.followings
@@ -31,18 +30,6 @@ class UsersController < ApplicationController
 
   def schedules
     @schedules = @user.schedules
-  end
-
-  def posts
-    @posts = @user.posts
-  end
-
-  def discs
-    @discs = @user.discs
-  end
-
-  def movies
-    @movies = @user.movies
   end
 
   def contacts

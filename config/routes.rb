@@ -25,14 +25,10 @@ Rails.application.routes.draw do
     resources :profiles, only: [:update]
     get :schedules,on: :member
       resources :schedules, only: [:new, :create, :update]
-    get :posts, on: :member
-      resources :posts, only: [:new, :create, :update]
-    get :discs, on: :member
-      resources :discs, only: [:new, :create, :update]
-    # get :goods, on: :member
+      resources :posts
+      resources :discs
       resources :goods
-    get :movies, on: :member
-      resources :movies, only: [:new, :create, :update]
+      resources :movies
     get :contacts, on: :member  
       resources :contacts, only: [:new]
       post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
@@ -54,10 +50,6 @@ Rails.application.routes.draw do
   get 'goods_search', to: 'goods#search'
 
   resources :profiles, only: [:show, :edit]
-  resources :posts, only: [:show, :edit, :destroy]
-  resources :discs, only: [:show, :edit, :destroy]
-
-  resources :movies, only: [:show, :edit, :destroy]
   resources :contacts, only: [:show, :create, :destroy]
   resources :prefectures, only: [:index, :show]
   resources :genres, only: [:index, :show]

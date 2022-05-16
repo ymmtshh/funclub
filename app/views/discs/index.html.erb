@@ -1,10 +1,10 @@
-<%= @user.profile.name %>さんのDISCOGRAPHY一覧<br>
+<%= @user.profile.name %>さんのdisc一覧<br>
+
 <% @discs.each do |disc| %>
-  <%= link_to disc_path(disc) do %>
+  <%= link_to user_disc_path(@user, disc) do %>
   <%= disc.title %><br>
   <% end %>
 <% end %>
-
 
 <% if @user.id == current_user.id %>
   <%= link_to "新規作成", new_user_disc_path(@user.id) %>

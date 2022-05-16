@@ -10,7 +10,7 @@
 <%=simple_format @good.body%><br>
 
 <% if @good.image? %>
-    <%= image_tag @good.image.to_s %>
+  <%= image_tag @good.image.to_s %>
 <% end %>
 
 <%= link_to "一覧へ戻る", user_goods_path(@user.id) %>

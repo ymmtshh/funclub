@@ -10,9 +10,9 @@
 詳細<br>
 <%=simple_format @post.body%><br>
 
-<%= link_to "一覧へ戻る", posts_user_path(@post.user_id) %>
+<%= link_to "一覧へ戻る", user_posts_path(@user.id) %>
 
 <% if @post.user_id == current_user.id %>
-  <%= link_to "編集", edit_post_path(@post) %>
-  <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= link_to "編集", edit_user_post_path(@user, @post) %>
+  <%= link_to "削除", user_post_path(@user, @post), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>

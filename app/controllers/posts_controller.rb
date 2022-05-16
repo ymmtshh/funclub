@@ -2,7 +2,13 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
   # before_action :user, except: [:show]
 
+  def index
+    @user = User.find(params[:user_id])
+    @posts = @user.posts.order(created_at: :desc).all
+  end
+
   def show
+    @user = User.find(params[:user_id])
   end
   
   def new
@@ -17,7 +23,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = params[:user_id]
     if @post.save
-      redirect_to post_path(@post), notice: "NEWSを作成しました。"
+      redirect_to user_posts_path(current_user.id), notice: "NEWSを作成しました。"
     else
       render :new
     end
@@ -25,7 +31,7 @@ class PostsController < ApplicationController
   
   def update
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "NEWSを更新しました。"
+      redirect_to user_post_path(current_user.id, @post), notice: "NEWSを更新しました。"
     else
       render :edit
     end
@@ -33,9 +39,9 @@ class PostsController < ApplicationController
   
   def destroy
     if @post.destroy
-      redirect_to posts_user_path(@post.user_id), notice: "NEWSを削除しました。"
+      redirect_to user_posts_path(current_user.id), notice: "NEWSを削除しました。"
     else
-      redirect_to posts_user_path(@post.user_id), alert: "NEWSを削除できませんでした。"
+      redirect_to user_posts_path(current_user.id), alert: "NEWSを削除できませんでした。"
     end
   end
   

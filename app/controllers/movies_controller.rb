@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @user = User.find(params[:user_id])
+    @movies = @user.movies.order(created_at: :desc).all
+  end
+
   def show
+    @user = User.find(params[:user_id])
   end
 
   def new
@@ -16,7 +22,7 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
     @movie.user_id = params[:user_id]
     if @movie.save
-      redirect_to movie_path(@movie), notice: "動画を投稿しました。"
+      redirect_to user_movies_path(current_user.id), notice: "動画を投稿しました。"
     else
       render :new
     end
@@ -24,7 +30,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      redirect_to movie_path(@movie), notice: "動画を更新しました。"
+      redirect_to user_movie_path(current_user.id, @movie), notice: "動画を更新しました。"
     else
       render :edit
     end
@@ -32,9 +38,9 @@ class MoviesController < ApplicationController
 
   def destroy
     if @movie.destroy
-      redirect_to movies_user_path(@movie.user_id), notice: "動画を削除しました。"
+      redirect_to user_movies_path(current_user.id), notice: "動画を削除しました。"
     else
-      redirect_to movies_user_path(@movie.user_id), alert: "動画を削除できませんでした。"
+      redirect_to user_movies_path(current_user.id), alert: "動画を削除できませんでした。"
     end
   end
 

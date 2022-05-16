@@ -1,8 +1,13 @@
 class DiscsController < ApplicationController
   before_action :find_disc, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @user = User.find(params[:user_id])
+    @discs = @user.discs.order(created_at: :desc).all
+  end
 
   def show
+    @user = User.find(params[:user_id])
   end
 
   def new
@@ -17,7 +22,7 @@ class DiscsController < ApplicationController
     @disc = Disc.new(disc_params)
     @disc.user_id = params[:user_id]
     if @disc.save
-      redirect_to disc_path(@disc), notice: "DISCOGRAPHYを作成しました。"
+      redirect_to user_discs_path(current_user.id), notice: "DISCOGRAPHYを作成しました。"
     else
       render :new
     end
@@ -25,7 +30,7 @@ class DiscsController < ApplicationController
 
   def update
     if @disc.update(disc_params)
-      redirect_to disc_path(@disc), notice: "DISCOGRAPHYを更新しました。"
+      redirect_to user_disc_path(current_user.id, @disc), notice: "DISCOGRAPHYを更新しました。"
     else
       render :edit
     end
@@ -33,9 +38,9 @@ class DiscsController < ApplicationController
 
   def destroy
     if @disc.destroy
-      redirect_to discs_user_path(@disc.user_id), notice: "DISCOGRAPHYを削除しました。"
+      redirect_to user_discs_path(current_user.id), notice: "DISCOGRAPHYを削除しました。"
     else
-      redirect_to discs_user_path(@disc.user_id), alert: "DISCOGRAPHYを削除できませんでした。"
+      redirect_to user_discs_path(current_user.id), alert: "DISCOGRAPHYを削除できませんでした。"
     end
   end
 

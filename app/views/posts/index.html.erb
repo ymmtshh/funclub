@@ -1,10 +1,10 @@
-<%= @user.profile.name %>さんのNEWS一覧<br>
+<%= @user.profile.name %>さんのPOST一覧<br>
+
 <% @posts.each do |post| %>
-  <%= link_to post_path(post) do %>
+  <%= link_to user_post_path(@user, post) do %>
   <%= post.title %><br>
   <% end %>
 <% end %>
-
 
 <% if @user.id == current_user.id %>
   <%= link_to "新規作成", new_user_post_path(@user.id) %>

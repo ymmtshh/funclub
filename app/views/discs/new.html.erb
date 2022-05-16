@@ -1,4 +1,4 @@
 <h1>DISCOGRAPHYを作成</h1>
 
 <%= render partial: "form", locals: { user: @user, disc: @disc } %>
-<%= link_to 'キャンセル' , discs_user_path(@user), :class => "btn btn-light" %>
+<%= link_to 'キャンセル' , user_discs_path(@user.id), :class => "btn btn-light" %>

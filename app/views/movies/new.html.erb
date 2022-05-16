@@ -1,4 +1,4 @@
 <h1>MOVIEを作成</h1>
 
 <%= render partial: "form", locals: { user: @user, movie: @movie} %>
-<%= link_to 'キャンセル' , movies_user_path(@user), :class => "btn btn-light" %>
+<%= link_to 'キャンセル' , user_movies_path(@user.id), :class => "btn btn-light" %>

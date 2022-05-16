@@ -18,9 +18,9 @@
 詳細<br>
 <%=simple_format @disc.body %><br>
 
-<%= link_to "一覧へ戻る", discs_user_path(@disc.user_id) %>
+<%= link_to "一覧へ戻る", user_discs_path(@user.id) %>
 
 <% if @disc.user_id == current_user.id %>
-  <%= link_to "編集", edit_disc_path(@disc) %>
-  <%= link_to "削除", disc_path(@disc), method: :delete, data: {confirm: "削除しますか？"} %>
+  <%= link_to "編集", edit_user_disc_path(@user, @disc) %>
+  <%= link_to "削除", user_disc_path(@user, @disc), method: :delete, data: {confirm: "削除しますか？"} %>
 <% end %>
