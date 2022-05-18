@@ -23,12 +23,10 @@ Rails.application.routes.draw do
     get :followings, on: :member
     get :followers, on: :member
 
-    resources :profiles, only: [:update]
-
+    resources :profiles, only: [:edit, :update]
     resources :schedules do
       resources :comments, only: [:create] 
     end
-    
     resources :posts
     resources :discs
     resources :goods
@@ -52,13 +50,12 @@ Rails.application.routes.draw do
     end
   end
   
-  get 'search', to: 'searches#search'
   get 'goods_search', to: 'goods#search'
-
-  resources :profiles, only: [:show, :edit]
+  get 'search', to: 'searches#search'
+  
   resources :contacts, only: [:show, :create, :destroy]
-  resources :prefectures, only: [:index, :show]
   resources :genres, only: [:index, :show]
-
+  resources :prefectures, only: [:index, :show]
+  
   root 'home#index'
 end

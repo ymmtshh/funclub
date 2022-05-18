@@ -5,8 +5,7 @@
         <%= @user.profile.name %>@<%= @user.username %>
       </h1>
       <%= link_to "アカウント", account_path %>
-      <%= link_to "プロフィール", profile_path(@user.profile) %>
-      <%= link_to "プロフィール編集", edit_profile_path(@user) %><br>
+      <%= link_to "プロフィール編集", edit_user_profile_path(@user.profile) %><br>
       <%= link_to "CONTACT一覧", contacts_user_path %>
       <%= link_to "デバイスのedit", edit_user_registration_path %>
     </div>

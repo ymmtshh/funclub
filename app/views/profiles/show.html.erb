@@ -1,4 +1,6 @@
-<h1><%= @profile.name %>のプロフィール</h1>
+<%
+=begin%>
+ <h1><%= @profile.name %>のプロフィール</h1>
 
 <%
 =begin%>
@@ -7,4 +9,6 @@
 =end%>
 
 <%= link_to "編集", edit_profile_path(@profile) %><br>
-<%= link_to 'マイページへ戻る' , user_path(@profile.user_id), :class => "btn btn-light" %><br>
+<%= link_to 'マイページへ戻る' , user_path(@profile.user_id), :class => "btn btn-light" %><br> 
+<%
+=end%>
