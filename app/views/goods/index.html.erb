@@ -1,5 +1,12 @@
 <%= @user.profile.name %>さんのGOODS一覧<br>
 
+<%= form_tag(goods_search_path, method: :get) do %>
+  <%= hidden_field_tag :user_id, @user.id %>
+  <%= select_tag(:goods_category_id, options_for_select([["Tシャツ/ロングTシャツ", 1], ["パーカー/スウェット", 2], ["タオル", 3], ["バッグ", 4], ["その他", 5]], @goods_category_id)) %>
+  <%= submit_tag "絞り込み" %>
+<% end %>
+
+
 <% @goods.each do |good| %>
   <%= link_to user_good_path(@user, good) do %>
   <%= good.title %><br>

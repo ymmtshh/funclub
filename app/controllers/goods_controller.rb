@@ -6,6 +6,14 @@ class GoodsController < ApplicationController
     @goods = @user.goods.order(created_at: :desc).all
   end
 
+  def search
+    @user = User.find(params[:user_id])
+    @goods_category_id = params[:goods_category_id]
+    @goods = Good.includes(:user).where(goods_category_id: @goods_category_id )
+    render :index
+  end
+
+
   def show
     @user = User.find(params[:user_id])
   end
