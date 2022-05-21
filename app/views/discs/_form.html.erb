@@ -13,11 +13,14 @@
     <%= f.label :title, "タイトル", :class => "form-label" %><br />
     <%= f.text_field :title, :class => "form-control" %><br />
 
+    <%= f.label :price, "価格", :class => "form-label" %><br />
+    <%= f.text_field :price, :class => "form-control" %><br />
+
     <%= f.label :published_date, "リリース日", class: 'form-label' %><br />
     <%= f.date_field :published_date, class: 'form-control' %><br />
 
-    <%= f.label :price, "価格", :class => "form-label" %><br />
-    <%= f.text_field :price, :class => "form-control" %><br />
+    <%= f.label :disc_category_id, "カテゴリー" %><br>
+    <%= f.collection_select :disc_category_id, DiscCategory.all, :id, :name, {prompt: "選択してください"} %><br>
 
     <%= f.label :body, "詳細", :class => "form-label" %><br />
     <%= f.text_area :body, :class => "form-control" %><br />

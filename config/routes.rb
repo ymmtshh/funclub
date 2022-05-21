@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   end
   
   get 'goods_search', to: 'goods#search'
+  get 'disc_search', to: 'discs#search'
   get 'search', to: 'searches#search'
   
   resources :contacts, only: [:show, :create, :destroy]

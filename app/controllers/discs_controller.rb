@@ -6,6 +6,13 @@ class DiscsController < ApplicationController
     @discs = @user.discs.order(created_at: :desc).all
   end
 
+  def search
+    @user = User.find(params[:user_id])
+    @disc_category_id = params[:disc_category_id]
+    @discs = Disc.includes(:user).where(disc_category_id: @disc_category_id )
+    render :index
+  end
+
   def show
     @user = User.find(params[:user_id])
   end
@@ -55,6 +62,7 @@ class DiscsController < ApplicationController
       :title,
       :published_date,
       :price,
+      :disc_category_id,
       :body,
       :image,
       :image_cache,

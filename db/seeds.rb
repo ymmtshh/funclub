@@ -132,3 +132,10 @@ GoodsCategory.create([
   { name: 'バッグ', slug: 'bag' },
   { name: 'その他', slug: 'others' }
 ])
+
+DiscCategory.create([
+  { name: 'SINGLE', slug: 'single' },
+  { name: 'EP', slug: 'ep' },
+  { name: 'ALBUM', slug: 'album' },
+  { name: 'DVD/OTHER', slug: 'dvd_other' }
+])

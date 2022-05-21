@@ -60,10 +60,10 @@ class GoodsController < ApplicationController
   def good_params
     params.require(:good).permit(
       :user_id,
-      :goods_category_id,
       :title,
-      :body,
+      :goods_category_id,
       :price,
+      :body,
       :image,
       :image_cache,
       :remove_image

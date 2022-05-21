@@ -1,5 +1,11 @@
 <%= @user.profile.name %>さんのdisc一覧<br>
 
+<%= form_tag(disc_search_path, method: :get) do %>
+  <%= hidden_field_tag :user_id, @user.id %>
+  <%= select_tag(:disc_category_id, options_for_select([["SINGLE", 1], ["EP", 2], ["ALBUM", 3], ["DVD/OTHER", 4]], @disc_category_id)) %>
+  <%= submit_tag "絞り込み" %>
+<% end %>
+
 <% @discs.each do |disc| %>
   <%= link_to user_disc_path(@user, disc) do %>
   <%= disc.title %><br>

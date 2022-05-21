@@ -4,6 +4,7 @@ class CreateDiscs < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.string :title
       t.string :price
+      t.integer :disc_category_id
       t.text :body
       t.string :image
       t.date :published_date

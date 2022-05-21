@@ -3,18 +3,16 @@
   ジャケット<br>
   <%= image_tag @disc.image.to_s %>
 <% end %>
-
 タイトル<br>
 <%= @disc.title%><br>
-
+価格<br>
+<%=simple_format @disc.price %><br>
 <% if @disc.published_date? %>
 リリース日<br>
 <%= @disc.published_date.strftime("%Y年%-m月%-d日")  %><br>
 <% end %>
-
-価格<br>
-<%=simple_format @disc.price %><br>
-
+カテゴリー :<br>
+  <%= @disc.disc_category.name %><br>
 詳細<br>
 <%=simple_format @disc.body %><br>
 
