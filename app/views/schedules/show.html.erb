@@ -16,17 +16,17 @@ OPEN
 <% end %>
 
 
-  <div class="comments ml-5 mt-5">
-  <%= form_with(model:[@user, @schedule, @comment], local: true) do |f| %>
-    <%= f.text_area :comment_content, :size=>"60x3",placeholder: "コメントする" %>
+  <div class="reserves ml-5 mt-5">
+  <%= form_with(model:[@user, @schedule, @reserve], local: true) do |f| %>
+    <%= f.text_area :reserve_content, :size=>"60x3",placeholder: "コメントする" %>
     <%= f.submit "送信する", class: "btn btn-success mb-4" %>
   <% end %>
 
-  <p>コメント件数：<%= @comments.count %></p>
-    <% @comments.each do |comment| %><br>
-      <%= comment.created_at.strftime('%Y/%m/%d') %>
-      <%= comment.user.username %>
-      <%= comment.comment_content %>
+  <p>コメント件数：<%= @reserves.count %></p>
+    <% @reserves.each do |reserve| %><br>
+      <%= reserve.created_at.strftime('%Y/%m/%d') %>
+      <%= reserve.user.username %>
+      <%= reserve.reserve_content %>
     <% end %><br> 
 
 

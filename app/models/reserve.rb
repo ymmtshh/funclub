@@ -1,4 +1,4 @@
-class Comment < ApplicationRecord
+class Reserve < ApplicationRecord
   belongs_to :user
   belongs_to :schedule
 end

@@ -1,5 +1,5 @@
 class Schedule < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
+  has_many :reserves, dependent: :destroy
   mount_uploader :image, ScheduleImageUploader
 end

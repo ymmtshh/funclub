@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_21_114706) do
+ActiveRecord::Schema.define(version: 2022_05_22_145346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "comments", force: :cascade do |t|
-    t.string "comment_content"
-    t.bigint "user_id", null: false
-    t.bigint "schedule_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["schedule_id"], name: "index_comments_on_schedule_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
 
   create_table "contacts", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -147,6 +137,16 @@ ActiveRecord::Schema.define(version: 2022_05_21_114706) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reserves", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "schedule_id", null: false
+    t.string "reserve_content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["schedule_id"], name: "index_reserves_on_schedule_id"
+    t.index ["user_id"], name: "index_reserves_on_user_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -204,8 +204,6 @@ ActiveRecord::Schema.define(version: 2022_05_21_114706) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "comments", "schedules"
-  add_foreign_key "comments", "users"
   add_foreign_key "contacts", "users"
   add_foreign_key "discs", "users"
   add_foreign_key "goods", "users"
@@ -214,6 +212,8 @@ ActiveRecord::Schema.define(version: 2022_05_21_114706) do
   add_foreign_key "profile_genres", "genres"
   add_foreign_key "profile_genres", "profiles"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reserves", "schedules"
+  add_foreign_key "reserves", "users"
   add_foreign_key "schedules", "users"
   add_foreign_key "social_profiles", "profiles"
 end

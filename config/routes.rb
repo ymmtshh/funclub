@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
     resources :profiles, only: [:edit, :update]
     resources :schedules do
-      resources :comments, only: [:create] 
+      resources :reserves, only: [:create] 
     end
     resources :posts
     resources :discs

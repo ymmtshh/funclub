@@ -8,8 +8,8 @@ class SchedulesController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @comments = @schedule.comments.includes(:user).all
-    @comment  = @schedule.comments.build(user_id: current_user.id) if current_user
+    @reserves = @schedule.reserves.includes(:user).all
+    @reserve  = @schedule.reserves.build(user_id: current_user.id) if current_user
   end
 
   def new
@@ -62,7 +62,7 @@ class SchedulesController < ApplicationController
       :schedule_date,
       :open_time,
       :start_time,
-      :comment_content
+      :reserve_content
     )
   end
 
