@@ -1,4 +1,4 @@
-class ReservessController < ApplicationController
+class ReservesController < ApplicationController
 
     def create
       schedule = Schedule.find(params[:schedule_id])

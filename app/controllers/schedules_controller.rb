@@ -65,6 +65,4 @@ class SchedulesController < ApplicationController
       :reserve_content
     )
   end
-
-
 end
