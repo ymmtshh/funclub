@@ -1,5 +1,9 @@
 class ReservesController < ApplicationController
 
+  def index
+    @reserves = current_user.reserves.order(created_at: :desc).all
+  end
+
     def create
       schedule = Schedule.find(params[:schedule_id])
       reserve = current_user.reserves.new(reserve_params)

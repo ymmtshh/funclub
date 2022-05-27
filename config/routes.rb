@@ -25,8 +25,9 @@ Rails.application.routes.draw do
 
     resources :profiles, only: [:edit, :update]
     resources :schedules do
-      resources :reserves, only: [:create] 
+      resources :reserves, only: [:create, :destroy] 
     end
+    resources :reserves, only: [:index] 
     resources :posts
     resources :discs
     resources :goods
