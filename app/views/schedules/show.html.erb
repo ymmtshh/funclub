@@ -17,16 +17,19 @@ OPEN
 
 
   <div class="reserves ml-5 mt-5">
+  チケット予約申し込み
   <%= form_with(model:[@user, @schedule, @reserve], local: true) do |f| %>
-    <%= f.text_area :reserve_content, :size=>"60x3",placeholder: "コメントする" %>
-    <%= f.submit "送信する", class: "btn btn-success mb-4" %>
+    <%= f.text_field :name, :size=>"60x3",placeholder: "名前" %><br>
+    <%= f.text_field :number, :size=>"60x3",placeholder: "枚数" %><br>
+    <%= f.text_field :body, :size=>"60x3",placeholder: "その他" %><br>
+    <%= f.submit "予約する", class: "btn btn-success mb-4" %>
   <% end %>
 
-  <p>コメント件数：<%= @reserves.count %></p>
+  <p>予約件数：<%= @reserves.count %></p>
     <% @reserves.each do |reserve| %><br>
       <%= reserve.created_at.strftime('%Y/%m/%d') %>
-      <%= reserve.user.username %>
-      <%= reserve.reserve_content %>
+      <%= reserve.name %>
+      <%= reserve.body %>
     <% end %><br> 
 
 

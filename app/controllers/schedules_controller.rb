@@ -62,7 +62,9 @@ class SchedulesController < ApplicationController
       :schedule_date,
       :open_time,
       :start_time,
-      :reserve_content
+      :name,
+      :number,
+      :body
     )
   end
 end

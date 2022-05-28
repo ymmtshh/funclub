@@ -25,10 +25,10 @@ Rails.application.routes.draw do
 
     resources :profiles, only: [:edit, :update]
     resources :schedules do
-      resources :reserves, only: [:create, :destroy] 
+      resources :reserves, only: [:create] 
     end
     resources :reserves, only: [:index]
-    get 'reservations', to: 'reserves#reservation'
+    get 'reservations', to: 'reserves#reservations'
     resources :posts
     resources :discs
     resources :goods
@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resources :contacts, only: [:show, :create, :destroy]
   resources :genres, only: [:index, :show]
   resources :prefectures, only: [:index, :show]
+  resources :reserves, only: [:destroy] 
   
   root 'home#index'
 end

@@ -1,26 +1,38 @@
   <tbody>
-  <% if @reserves.blank? %>
+  <% if @lives.blank? %>
     <tr>
         <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
     </tr>
   <% end %>
-  <% @reserves.each do |reserve| %>
+  <% @lives.each do |live| %>
       <tr>
           <td>
               予約ライブ：
-              <%= link_to user_schedule_path(reserve.schedule, current_user) do %>
-                  <%= reserve.schedule.title %><br>
+              <%= link_to user_schedule_path(live.schedule.user, live.schedule) do %>
+                  <%= live.schedule.title %><br>
               <% end %>
           </td>
           <td style="padding-top: 30px;">
               予約アーティスト：
-              <%= link_to user_path(reserve.schedule.user), class: "tootip" do %>
-                  <%= reserve.schedule.user.username %><br>
+              <%= link_to user_path(live.schedule.user), class: "tootip" do %>
+                  <%= live.schedule.user.username %><br>
               <% end %>
           </td>
-          送信内容：
+          予約者名：
           <td style="padding-top: 30px;">
-              <%= reserve.reserve_content %><br>--------<br>
+              <%= live.name %><br>
+          </td>
+          枚数：
+          <td style="padding-top: 30px;">
+              <%= live.number %><br>
+          </td>
+          その他：
+          <td style="padding-top: 30px;">
+              <%= live.body %><br>
+          </td>
+          予約をキャンセルする：
+          <td style="padding-top: 30px;">
+              <%= link_to "キャンセル", live, method: :delete, data: {confirm: "キャンセルしますか？"} %><br>--------<br>
           </td>
       </tr>
   <% end %>

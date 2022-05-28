@@ -1,0 +1,37 @@
+    <tbody>
+    <% if @schedules.blank? %>
+        <tr>
+            <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
+        </tr>
+    <% end %>
+    <% @schedules.each do |schedule| %>
+        <% schedule.reserves.each do |reserve| %>
+        <tr>
+            <td>
+                予約ライブ：
+                <%= link_to user_schedule_path(current_user, reserve.schedule) do %>
+                    <%= reserve.schedule.title %><br>
+                <% end %>
+            </td>
+            <td style="padding-top: 30px;">
+                予約者アカウント：
+                <%= link_to user_path(reserve.user), class: "tootip" do %>
+                    <%= reserve.user.username %><br>
+                <% end %>
+            </td>
+            予約者名：
+            <td style="padding-top: 30px;">
+                <%= reserve.name %><br>
+            </td>
+            枚数：
+            <td style="padding-top: 30px;">
+                <%= reserve.number %><br>
+            </td>
+            その他：
+            <td style="padding-top: 30px;">
+                <%= reserve.body %><br>--------<br>
+            </td>
+        </tr>
+    <% end %>
+<% end %>
+</tbody>

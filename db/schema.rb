@@ -140,7 +140,9 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
   create_table "reserves", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "schedule_id", null: false
-    t.string "reserve_content"
+    t.string "name"
+    t.string "number"
+    t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["schedule_id"], name: "index_reserves_on_schedule_id"

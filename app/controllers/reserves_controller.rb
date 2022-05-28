@@ -1,11 +1,16 @@
 class ReservesController < ApplicationController
 
     def index
-      @reserves = current_user.reserves.order(created_at: :desc).all
+      @lives = current_user.reserves.order(created_at: :desc).all
     end
 
-    def reservation
+    def reservations
       @schedules = current_user.schedules
+    end
+
+    def new
+      @user = User.find(current_user.id)
+      @schedule = Schedule.new
     end
 
     def create
@@ -17,14 +22,19 @@ class ReservesController < ApplicationController
     end
   
     def destroy
-      reserve.find_by(id: params[:id], schedule_id: params[:schedule_id]).destroy
-      redirect_to user_schedule_path(params[:schedule_id])
+      reserve = Reserve.find(params[:id])
+      reserve.destroy
+      redirect_to user_reserves_path(current_user.id) 
     end
   
     private
   
     def reserve_params
-      params.require(:reserve).permit(:reserve_content)
+      params.require(:reserve).permit(
+        :name,
+        :number,
+        :body
+      )
     end
 
 end

@@ -3,7 +3,9 @@ class CreateReserves < ActiveRecord::Migration[6.0]
     create_table :reserves do |t|
       t.references :user, null: false, foreign_key: true
       t.references :schedule, null: false, foreign_key: true
-      t.string :reserve_content
+      t.string :name
+      t.string :number
+      t.string :body
 
       t.timestamps
     end
