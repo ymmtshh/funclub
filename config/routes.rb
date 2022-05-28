@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     resources :schedules do
       resources :reserves, only: [:create, :destroy] 
     end
-    resources :reserves, only: [:index] 
+    resources :reserves, only: [:index]
+    get 'reservations', to: 'reserves#reservation'
     resources :posts
     resources :discs
     resources :goods
