@@ -1,37 +1,71 @@
-    <tbody>
-    <% if @schedules.blank? %>
-        <tr>
-            <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
-        </tr>
-    <% end %>
-    <% @schedules.each do |schedule| %>
-        <% schedule.reserves.each do |reserve| %>
-        <tr>
-            <td>
-                予約ライブ：
-                <%= link_to user_schedule_path(current_user, reserve.schedule) do %>
-                    <%= reserve.schedule.title %><br>
+<section class="section">
+    <div class="container">
+        <p class="title">受注予約の一覧</p>
+        <br/>
+        <table class="table is-fullwidth" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>申し込み日</th>
+                    <th>ステータス</th>
+                    <th>ライブ</th>
+                    <th>予約者アカウント</th>
+                    <th>予約者名</th>
+                    <th>枚数</th>
+                    <th>その他</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <%# 予約されたスケジュール一覧 %>
+                <% if @schedules.blank? %>
+                    <tr>
+                        <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
+                    </tr>
                 <% end %>
-            </td>
-            <td style="padding-top: 30px;">
-                予約者アカウント：
-                <%= link_to user_path(reserve.user), class: "tootip" do %>
-                    <%= reserve.user.username %><br>
+                <% @schedules.each do |schedule| %>
+                    <% schedule.reserves.each do |reserve| %>
+                    <tr>
+                        <td style="padding-top: 30px;"><%= I18n.l(reserve.created_at) %></td>
+                        <!-- ステータス -->
+                        <td style="padding-top: 30px;">
+                            <div class="form-inline">
+                            <% if reserve.Waiting? %>
+                                <%= link_to approve_reserve_path(reserve), method: :post do %><i class="fa fa-thumbs-up fa-lg"></i> <% end %>|
+                                <%= link_to decline_reserve_path(reserve), method: :post do %><i class="fa fa-thumbs-down fa-lg"></i> <% end %>
+                            <% end %>
+                            </div>
+                            <% if reserve.Waiting? %>
+                            <p class="tag is-warning">承認待ちです。要確認</p>
+                            <% elsif reserve.Approved? %>
+                            <p class="tag is-success">予約を承認しました</p>
+                            <% else  %>
+                            <p class="tag is-danger">予約を拒否しました</p>
+                            <% end  %>
+                        </td>
+                        <td>
+                            <%= link_to user_schedule_path(current_user, reserve.schedule) do %>
+                                <%= reserve.schedule.title %>
+                            <% end %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            <%= link_to user_path(reserve.user), class: "tootip" do %>
+                                <%= reserve.user.username %>
+                            <% end %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            <%= reserve.name %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            <%= reserve.number %>
+                        </td>
+                        <td style="padding-top: 30px;">
+                            <%= reserve.body %>
+                        </td>
+                    </tr>
+                    <% end %>
                 <% end %>
-            </td>
-            予約者名：
-            <td style="padding-top: 30px;">
-                <%= reserve.name %><br>
-            </td>
-            枚数：
-            <td style="padding-top: 30px;">
-                <%= reserve.number %><br>
-            </td>
-            その他：
-            <td style="padding-top: 30px;">
-                <%= reserve.body %><br>--------<br>
-            </td>
-        </tr>
-    <% end %>
-<% end %>
-</tbody>
+            </tbody>
+        </table>
+    </div>
+</section>

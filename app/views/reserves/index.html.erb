@@ -1,39 +1,67 @@
-  <tbody>
-  <% if @lives.blank? %>
-    <tr>
-        <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
-    </tr>
-  <% end %>
-  <% @lives.each do |live| %>
-      <tr>
-          <td>
-              予約ライブ：
+<section class="section">
+  <div class="container">
+    <p class="title">ご予約の一覧</p>
+    <br/>
+    <table class="table is-fullwidth" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>申し込み日</th>
+          <th>ステータス</th>
+          <th>ライブ</th>
+          <th>予約アーティスト</th>
+          <th>予約者名</th>
+          <th>枚数</th>
+          <th>キャンセル</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>  
+      <tbody>
+      <%# 予約したスケジュール一覧 %>
+        <% if @lives.blank? %>
+          <tr>
+            <td colspan="7" class="has-text-centered"><h1>表示できるご予約はありません。</h1></td>
+          </tr>
+        <% end %>
+        <% @lives.each do |live| %>
+          <tr>
+            <td style="padding-top: 30px;"><%= I18n.l(live.created_at) %></td>
+              <!-- ステータス -->
+            <td style="padding-top: 30px;">
+              <% if live.Waiting? %>
+                  <p class="tag is-warning">承認待ちです。</p>
+              <% elsif live.Approved? %>
+                  <p class="tag is-success">予約済みです</p>
+              <% else  %>
+                  <p class="tag is-warning">予約できませんでした</p>
+              <% end  %>
+            </td>
+            <td>
               <%= link_to user_schedule_path(live.schedule.user, live.schedule) do %>
-                  <%= live.schedule.title %><br>
+                <%= live.schedule.title %>
               <% end %>
-          </td>
-          <td style="padding-top: 30px;">
-              予約アーティスト：
+            </td>
+            <td style="padding-top: 30px;">
               <%= link_to user_path(live.schedule.user), class: "tootip" do %>
-                  <%= live.schedule.user.username %><br>
+                  <%= live.schedule.user.username %>
               <% end %>
-          </td>
-          予約者名：
-          <td style="padding-top: 30px;">
-              <%= live.name %><br>
-          </td>
-          枚数：
-          <td style="padding-top: 30px;">
-              <%= live.number %><br>
-          </td>
-          その他：
-          <td style="padding-top: 30px;">
-              <%= live.body %><br>
-          </td>
-          予約をキャンセルする：
-          <td style="padding-top: 30px;">
-              <%= link_to "キャンセル", live, method: :delete, data: {confirm: "キャンセルしますか？"} %><br>--------<br>
-          </td>
-      </tr>
-  <% end %>
-  </tbody>
+            </td>
+            <td style="padding-top: 30px;">
+                <%= live.name %>
+            </td>
+
+            <td style="padding-top: 30px;">
+                <%= live.number %>
+            </td>
+            <td style="padding-top: 30px;">
+                <%= live.body %>
+            </td>
+            <td style="padding-top: 30px;">
+              <%= link_to "キャンセル", live, method: :delete, data: {confirm: "キャンセルしますか？"} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

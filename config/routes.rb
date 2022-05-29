@@ -59,7 +59,12 @@ Rails.application.routes.draw do
   resources :contacts, only: [:show, :create, :destroy]
   resources :genres, only: [:index, :show]
   resources :prefectures, only: [:index, :show]
-  resources :reserves, only: [:destroy] 
-  
+  resources :reserves, only: [:destroy, :approve, :decline] do
+    member do
+      post '/approve' => "reserves#approve"
+      post '/decline' => "reserves#decline"
+    end
+  end
+
   root 'home#index'
 end

@@ -64,7 +64,8 @@ class SchedulesController < ApplicationController
       :start_time,
       :name,
       :number,
-      :body
+      :body,
+      :instant
     )
   end
 end

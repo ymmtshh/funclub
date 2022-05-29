@@ -22,6 +22,14 @@
     <%= f.label :start_time, "START/", :class => "form-label" %>
     <%= f.time_select(:start_time, {class:'select-date', id:"start-time", prompt:'--', time_separator: ':', minute_step: 5 }, ignore_data: true) %><br />
 
+    <div class="col-md-6 select">
+      <div class="form-group">
+        <label>予約種別</label>
+        <%= f.select :instant, Schedule.instants.map {|key,value| [key.humanize, key]}, selected: 'Instant', prompt: "選択してください", class: "form-control" %>
+      </div>
+        <label>即時予約制:Instant, 承認予約制:Request</label>
+    </div>
+
     <%= f.label :body, "詳細", :class => "form-label" %><br />
     <%= f.text_area :body, :class => "form-control" %><br />
 

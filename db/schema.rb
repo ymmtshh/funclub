@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
   create_table "reserves", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "schedule_id", null: false
+    t.bigint "status", default: 0
     t.string "name"
     t.string "number"
     t.string "body"
@@ -151,6 +152,7 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "instant", default: 1
     t.string "title"
     t.text "body"
     t.date "schedule_date"

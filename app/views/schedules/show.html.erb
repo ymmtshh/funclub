@@ -15,6 +15,8 @@ OPEN
     <%= image_tag @schedule.image.to_s %>
 <% end %>
 
+    <!-- 承認制の場合はアイコンを表示しない　-->
+  <span><% if @schedule.Instant? %><i class="fas fa-chess-king" style="color: #ffb400"></i><% end %></span>
 
   <div class="reserves ml-5 mt-5">
   チケット予約申し込み
@@ -22,7 +24,11 @@ OPEN
     <%= f.text_field :name, :size=>"60x3",placeholder: "名前" %><br>
     <%= f.text_field :number, :size=>"60x3",placeholder: "枚数" %><br>
     <%= f.text_field :body, :size=>"60x3",placeholder: "その他" %><br>
-    <%= f.submit "予約する", class: "btn btn-success mb-4" %>
+    <% if @schedule.Instant? %>
+      <%= f.submit "予約する", id: "btn_book", class: "button is-danger is-fullwidth m-t-10 m-b-10" %>
+    <% else %>
+      <%= f.submit "予約リクエストを送信", id: "btn_book", class: "button is-danger is-fullwidth m-t-10 m-b-10" %>
+    <% end %>
   <% end %>
 
   <p>予約件数：<%= @reserves.count %></p>
