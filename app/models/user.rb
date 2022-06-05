@@ -12,25 +12,45 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
   has_many :schedules, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :discs, dependent: :destroy
   has_many :goods, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :movies, dependent: :destroy
   has_many :reserves, dependent: :destroy
 
-  # フォローする側から中間テーブルへのアソシエーション
-  has_many :relationships, foreign_key: :following_id, dependent: :destroy
-  # フォローする側からフォローされたユーザを取得する
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  has_many :relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :follower
-  # フォローされる側から中間テーブルへのアソシエーション
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
-  # フォローされる側からフォローしているユーザを取得する
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :following
 
-# providerが空かnil で emailが入力されたときメールの認証を行う
-  def email_required?
-    (provider.blank? || !email.blank?) && super
+# フォローしたときの処理
+def follow(user_id)
+  relationships.create(follower_id: user_id)
+end
+# フォローを外すときの処理
+def unfollow(user_id)
+  relationships.find_by(follower_id: user_id).destroy
+end
+# フォローしているか判定
+def following?(user)
+  followings.include?(user)
+end
+
+def create_notification_follow!(current_user)
+  temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+  if temp.blank?
+    notification = current_user.active_notifications.new(
+      visited_id: id,
+      action: 'follow'
+    )
+    notification.save if notification.valid?
   end
+end
+
 
   # usernameのみでログイン
   attr_writer :login
@@ -71,11 +91,6 @@ class User < ApplicationRecord
     else
       super
     end
-  end
-
-  # あるユーザが引数で渡されたuserにフォローされているか調べるメソッド
-  def is_followed_by?(user)
-    reverse_of_relationships.find_by(following_id: user.id).present?
   end
 
   # パスワードなしでもメール送信

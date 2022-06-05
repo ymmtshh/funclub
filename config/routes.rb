@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :relationships, only: [:create, :destroy]
-    get :followings, on: :member
-    get :followers, on: :member
+    get :followings, to: 'relationships#followings', as: 'followings'
+    get :followers, to: 'relationships#followers', as: 'followers'
 
     resources :profiles, only: [:edit, :update]
     resources :schedules do
@@ -29,7 +29,13 @@ Rails.application.routes.draw do
     end
     resources :reserves, only: [:index]
     get 'reservations', to: 'reserves#reservations'
-    resources :posts
+    resources :posts do
+      resources :likes, only: [:create, :destroy]
+    end
+    member do
+      get :likes
+    end
+
     resources :discs
     resources :goods
     resources :movies
@@ -58,6 +64,7 @@ Rails.application.routes.draw do
   
   resources :contacts, only: [:show, :create, :destroy]
   resources :genres, only: [:index, :show]
+  resources :notifications, only: [:index, :destroy]
   resources :prefectures, only: [:index, :show]
   resources :reserves, only: [:destroy, :approve, :decline] do
     member do

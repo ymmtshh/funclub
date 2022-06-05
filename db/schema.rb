@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_22_145346) do
+ActiveRecord::Schema.define(version: 2022_06_05_074012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
     t.index ["slug"], name: "index_goods_categories_on_slug", unique: true
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "movies", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -90,11 +99,27 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
     t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "schedule_id"
+    t.integer "reserve_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reserve_id"], name: "index_notifications_on_reserve_id"
+    t.index ["schedule_id"], name: "index_notifications_on_schedule_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.text "body"
     t.string "image"
+    t.integer "likes_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -135,6 +160,9 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
     t.integer "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+    t.index ["following_id", "follower_id"], name: "index_relationships_on_following_id_and_follower_id", unique: true
+    t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
   create_table "reserves", force: :cascade do |t|
@@ -211,6 +239,8 @@ ActiveRecord::Schema.define(version: 2022_05_22_145346) do
   add_foreign_key "contacts", "users"
   add_foreign_key "discs", "users"
   add_foreign_key "goods", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
   add_foreign_key "movies", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "profile_genres", "genres"

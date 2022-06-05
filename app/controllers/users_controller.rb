@@ -1,14 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!,only: [:index]
-  before_action :find_user, only: [
-    :show, 
-    :schedules,
-    :posts,
-    :discs,
-    :goods,
-    :movies,
-    :contacts
-  ]
+  before_action :set_user
 
   def index
     @users = User.where.not(id: current_user.id)
@@ -16,16 +8,12 @@ class UsersController < ApplicationController
 
   def show
     @users = User.find(params[:id])
+    @likes = Like.where(user_id: current_user.id)
   end
 
-  def followings
-    user = User.find(params[:id])
-    @users = user.followings
-  end
-
-  def followers
-    user = User.find(params[:id])
-    @users = user.followers
+  def likes
+    likes = Like.where(user_id: @user.id).pluck(:post_id)
+    @like_posts = Post.find(likes) 
   end
 
   def contacts
@@ -43,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   private
-  def find_user
+  def set_user
     @user = User.find(params[:id])
   end
 

@@ -1,0 +1,10 @@
+
+<% @like_posts.each do |post| %>
+  <%= link_to user_path(post.user) do %>
+    <%= post.user.username %>
+  <% end %>
+  <%= link_to user_post_path(post.user) do %>
+    <%= post.title %>
+  <% end %>
+    <%= post.body %>
+<% end %>

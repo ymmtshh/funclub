@@ -10,6 +10,8 @@
 詳細<br>
 <%=simple_format @post.body%><br>
 
+  <%= render "likes/like", user: @user, post: @post%>
+
 <%= link_to "一覧へ戻る", user_posts_path(@user.id) %>
 
 <% if @post.user_id == current_user.id %>

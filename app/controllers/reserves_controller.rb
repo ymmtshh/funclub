@@ -19,8 +19,8 @@ class ReservesController < ApplicationController
       @reserve = current_user.reserves.new(reserve_params)
       @reserve.schedule = schedule
       @reserve.save
-
       if @reserve.save
+        @reserve.schedule.create_notification_reserve!(current_user, @reserve.id)
         if schedule.Request?
           flash[:notice] = "予約リクエストを送信しました。承認されるまでしばらくお待ちください。"
         else

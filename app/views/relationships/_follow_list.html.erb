@@ -1,0 +1,42 @@
+<div class="container marketing">
+  <div class="row d-flex justify-content-center">
+    <div class="col-10 mt-5">
+      <% if @users.exists? %>
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= link_to user_path(user) do %>
+                    <%= user.username %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if user != current_user %>
+                    <% if current_user.following?(user) %> 
+                    <%= link_to user_relationships_path(user), method: :delete, remote: true do %>
+                      <button class="btn btn-follow-delete">フォロー解除</button>
+                    <% end %>
+                    <% else %>
+                      <%= link_to user_relationships_path(user), method: :post, remote: true do %>
+                        <button class="btn btn-follow-create">フォロー</button>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

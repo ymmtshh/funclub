@@ -6,14 +6,24 @@
     <ul id="nav">
     <% if user_signed_in? %>
         <li>
-          <%= link_to "マイページ", user_path(current_user.id) %>
+          <%= link_to "マイページ", user_path(current_user) %>
         </li>
+        
+        <% if unchecked_notifications.any? %>
+            <i class="fa fa-circle" style="color: gold;"></i>
+        <% end %>
         <li>
-          <%= link_to "申し込み一覧",  user_reserves_path(current_user.id) %>
+            <%= link_to "通知", notifications_path, class: "btn-default" %>
         </li>
+
         <li>
-          <%= link_to "予約状況",  user_reservations_path(current_user.id) %>
+          <%= link_to "申し込み一覧",  user_reserves_path(current_user) %>
         </li>
+
+        <li>
+          <%= link_to "予約状況",  user_reservations_path(current_user) %>
+        </li>
+        
         <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
@@ -21,16 +31,20 @@
         <li>
           <%= link_to "新規登録", new_user_registration_path %>
         </li>
+
         <li>
           <%= link_to "ログイン", new_user_session_path %>
         </li>
     <% end %>
+        
         <li>
           <%= link_to "一覧", users_path %>
         </li>
+        
         <li>
           <%= link_to "活動地域", prefectures_path %>
         </li>
+        
         <li>
           <%= link_to "ジャンル", genres_path %>
         </li>

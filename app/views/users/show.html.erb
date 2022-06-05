@@ -12,6 +12,12 @@
   </div>
 </section>
 
+<div class="mypage-intro-topright">
+  <div class="mypage-follow-contents-<%= @user.id %>">
+    <%= render partial:"relationships/follow", lacals: { user: @user } %>
+  </div>
+</div>
+
 <%= render partial: "profiles/profile", locals: { profile: @user.profile} %>
 
 <%= link_to "NEWS", user_posts_path(@user.id) %>
@@ -20,3 +26,4 @@
 <%= link_to "MOVIE", user_movies_path(@user.id) %>
 <%= link_to "GOODS", user_goods_path(@user.id) %>
 <%= link_to "CONTACT", new_user_contact_path(@user.id) %>
+<%= link_to "お気に入り", likes_user_path(@user) %>
