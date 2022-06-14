@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!,only: [:index]
-  before_action :set_user
+  # before_action :authenticate_user!, only: [:index]
+  before_action :set_user, except: [:index]
 
   def index
     @users = User.where.not(id: current_user.id)

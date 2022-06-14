@@ -34,10 +34,9 @@ OPEN
   <p>予約件数：<%= @reserves.count %></p>
     <% @reserves.each do |reserve| %><br>
       <%= reserve.created_at.strftime('%Y/%m/%d') %>
-      <%= reserve.name %>
-      <%= reserve.body %>
+      予約者名：<%= reserve.name %>
+      <%= reserve.number %> 枚
     <% end %><br> 
-
 
 <%= link_to "一覧へ戻る", user_schedules_path(@user.id) %>
 

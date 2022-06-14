@@ -28,47 +28,35 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super(scope)
   # end
   def twitter
-    callback_from
+    callback_from :twitter
   end
 
   def google_oauth2
-    callback_from
+    callback_from :google
   end
 
-  # def failure
-  #   redirect_to root_path
-  # end
+  def failure
+    redirect_to root_path and return
+  end
 
   private
-  def callback_from
+  def callback_from(provider)
     provider = provider.to_s
-    @user = User.from_omniauth(request.env["omniauth.auth"].except("extra"))
-
-    if @user.persisted?
+    info = User.from_omniauth(request.env["omniauth.auth"])
+    @user = info[:user]
+    if @user.persisted? 
       # sign_in_and_redirect @user, event: :authentication
       if @user.profile.present?
         sign_in(@user)
         redirect_to root_path
       else
         sign_in(@user)
-        redirect_to edit_account_username_path(current_user.id)
+        redirect_to step1_user_signups_path(current_user)
       end
     else
       session["devise.user_attributes"] = @user.attributes
-      redirect_to new_user_registration_path(current_user.id)
+      redirect_to new_user_registration_path(current_user)
     end
   end
 
-  # def callback_from_google
-  #   provider = provider.to_s
-  #   @user = User.find_for_oauth_google(request.env['omniauth.auth'])
-
-  #   if @user.persisted?
-  #     flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-  #     sign_in_and_redirect @user, event: :authentication
-  #   else
-  #     session["devise.google_data"] = request.env['omniauth.auth'].except("extra")
-  #     redirect_to new_user_registration_url
-  #   end
-  # end
 end

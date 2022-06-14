@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: {
-    confirmations:      'users/confirmations',
-    sessions:           'users/sessions',
-    passwords:          'users/passwords',
-    registrations:      'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    confirmations: 'users/confirmations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    unlocks: 'users/unlocks'
   }
   devise_scope :user do
     patch 'users/confirm', to: 'users/confirmations#confirm'

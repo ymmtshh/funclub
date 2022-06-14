@@ -2,7 +2,7 @@ class SignupsController < ApplicationController
 
   def step1
     @user = User.find(current_user.id)
-    @profile = Profile.new # 新規インスタンス作成
+    @profile = Profile.new(user_id: current_user.id) # 新規インスタンス作成
   end
 
   def step2
@@ -45,7 +45,7 @@ class SignupsController < ApplicationController
           genre.save
         end
       end
-      redirect_to root_path
+      redirect_to user_path(current_user)
     else
       render '/signups/step1'
     end

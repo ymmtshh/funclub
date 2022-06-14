@@ -17,16 +17,18 @@
                 <% end %>
               </td>
               <td>
-                <% if user != current_user %>
-                  <% if user.is_followed_by?(current_user) %>
-                    <%=link_to user_relationships_path(user), method: :delete do %>
-                      <button type="button" class="btn btn btn-danger">フォロー解除</button>
+                <% unless user == current_user %>
+                <div class="mypage-follow-btn">
+                  <% if current_user.following?(user) %> 
+                    <%= link_to user_relationships_path(user), method: :delete do %>
+                      <button class="btn btn-follow-delete">フォロー解除</button>
                     <% end %>
                   <% else %>
-                    <%=link_to user_relationships_path(user), method: :post do %>
-                      <button type="button" class="btn btn btn-primary">フォロー</button>
+                    <%= link_to user_relationships_path(user), method: :post do %>
+                      <button class="btn btn-follow-create">フォロー</button>
                     <% end %>
                   <% end %>
+                </div>
                 <% end %>
               </td>
             </tr>

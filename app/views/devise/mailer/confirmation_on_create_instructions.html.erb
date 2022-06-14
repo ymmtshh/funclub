@@ -1,5 +1,3 @@
-<p>こんにちは <%= @user.username %>！</p>
-
-<p>アカウントの仮登録が完了しました。以下のリンクに進み本登録を行ってください。</p>
-
-<p><%= link_to "本登録に進む", confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>ようこそ <%= @email %>さん!</p>
+<p>メールアドレスの変更がリクエストされました。</p>
+<p><%= link_to "メールアドレスを変更する", confirmation_url(@resource, confirmation_token: @token) %></p>

@@ -12,7 +12,6 @@ class ProfilesController < ApplicationController
     end
 
     def edit
-        @profile = Profile.find(params[:id])
         @profile.social_profile
         @profile.genre_ids = @profile.genres.pluck(:id)
     end

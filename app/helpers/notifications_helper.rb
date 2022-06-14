@@ -9,9 +9,10 @@ module NotificationsHelper
       tag.a(@visitor.profile.name, href: user_path(@visitor)) + 'があなたをフォローしました'
     when 'reserve' then      
       @reserve = Reserve.find_by(id: @visitor_reserve)
-      @reserve_content =@reserve.body
+      # @reserve_content =@reserve.body
+      @schedule = @reserve.schedule
       @schedule_title =@reserve.schedule.title
-      tag.a(@visitor.profile.name, href: user_path(@visitor)) + 'が' + tag.a("#{@schedule_title}", href: user_schedule_path(notification.schedule_id)) + 'を予約しました'
+      tag.a(@visitor.profile.name, href: user_path(@visitor)) + 'が' + tag.a("#{@schedule_title}", href: user_schedule_path(current_user, @schedule)) + 'を予約しました'
     end
   end
 

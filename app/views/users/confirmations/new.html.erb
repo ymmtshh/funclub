@@ -1,5 +1,5 @@
-<h2>仮登録メールを再送信する</h2>
-アカウント作成のためのメールを再送信します。メールを確認して本登録に進んでください。
+<h2>認証メールを再送信する</h2>
+アカウント作成のための認証メールを再送信します。登録したメールアドレスを再度入力し送信してください。
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 

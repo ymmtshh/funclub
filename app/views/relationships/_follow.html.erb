@@ -5,11 +5,11 @@
   <% unless @user == current_user %>
     <div class="mypage-follow-btn">
       <% if current_user.following?(@user) %> 
-        <%= link_to user_relationships_path(@user), method: :delete, remote: true do %>
+        <%= link_to user_relationships_path(@user), method: :delete do %>
           <button class="btn btn-follow-delete">フォロー解除</button>
         <% end %>
       <% else %>
-        <%= link_to user_relationships_path(@user), method: :post, remote: true do %>
+        <%= link_to user_relationships_path(@user), method: :post do %>
           <button class="btn btn-follow-create">フォロー</button>
         <% end %>
       <% end %>

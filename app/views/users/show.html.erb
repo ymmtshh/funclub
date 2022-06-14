@@ -12,11 +12,16 @@
   </div>
 </section>
 
-<div class="mypage-intro-topright">
+<%
+=begin%>
+ <div class="mypage-intro-topright">
   <div class="mypage-follow-contents-<%= @user.id %>">
     <%= render partial:"relationships/follow", lacals: { user: @user } %>
   </div>
-</div>
+</div> 
+<%
+=end%>
+    <%= render partial:"relationships/follow", lacals: { user: @user } %>
 
 <%= render partial: "profiles/profile", locals: { profile: @user.profile} %>
 

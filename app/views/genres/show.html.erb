@@ -1,8 +1,8 @@
 <%= @genre.name %>の検索結果
-  <% @genres.each do |g| %>
-    <% g.profiles.each do |p| %>
-        <%= link_to user_path(p) do %><br>
-          <%= p.name %>
+  <% @genres.each do |genre| %>
+    <% genre.profiles.each do |profile| %>
+        <%= link_to user_path(profile.user_id) do %><br>
+          <%= profile.name %>
         <% end %>
     <% end %>
   <% end %>

@@ -1,15 +1,15 @@
-<h2><%= "パスワードの登録" %></h2>
+<%
+=begin%>
+ <h2><%= "パスワードの登録" %></h2>
 
 <%= form_for(resource, as: resource_name, url: users_confirm_path) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%
-=begin%>
+
  <%= f.label :username, "ユーザ名", :class => "form-label" %><br />
     <%= f.text_field :username, value: @user.username, autofocus: true, autocomplete: "username", :class => "form-control" %><br /> 
-<%
-=end%>
+
   
     <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
@@ -30,9 +30,6 @@
   </div>
 <% end %>
 
-  <%
-=begin%>
-
   <% if @user.provider.blank? %>
     <div class="form-group">
       <%= f.label :password, "パスワード" %>
@@ -44,6 +41,6 @@
       <%= f.label :password_confirmation, "もう一度パスワードを入力してください", :class => "form-label" %><br />
       <%= f.password_field :password_confirmation, :class => "form-control" %><br />
   <% end %>  
+ 
 <%
 =end%>
-

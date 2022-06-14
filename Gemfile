@@ -43,10 +43,11 @@ gem 'rails-i18n'
 gem 'enum_help'
 gem 'cancancan'
 gem 'pry-rails'
-gem 'omniauth'
+gem 'omniauth', '~> 2.0'
 gem 'omniauth-twitter'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', '~> 0.8'
 gem "omniauth-rails_csrf_protection"
+gem 'redis-actionpack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
