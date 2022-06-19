@@ -23,6 +23,8 @@ services:
       - chrome
     stdin_open: true
     tty: true
+    environment:
+      TZ: "Asia/Tokyo"
   chrome:
     image: selenium/standalone-chrome:latest
     container_name: chome

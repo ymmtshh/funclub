@@ -17,10 +17,10 @@
     <%= f.date_field :schedule_date, class: 'form-control' %><br />
 
     <%= f.label :open_time, " OPEN/", :class => "form-label" %>
-    <%= f.time_select(:open_time, {class:'select-date', id:"open_time", prompt:'--', time_separator: ':', minute_step: 5, }, ignore_data: true) %><br />
+    <%= f.time_select(:open_time, {class:'select-date', id:"open_time", prompt:'--', time_separator: ':', minute_step: 10, }, ignore_data: true) %><br />
 
     <%= f.label :start_time, "START/", :class => "form-label" %>
-    <%= f.time_select(:start_time, {class:'select-date', id:"start-time", prompt:'--', time_separator: ':', minute_step: 5 }, ignore_data: true) %><br />
+    <%= f.time_select(:start_time, {class:'select-date', id:"start-time", prompt:'--', time_separator: ':', minute_step: 10 }, ignore_data: true) %><br />
 
     <div class="col-md-6 select">
       <div class="form-group">
