@@ -47,8 +47,7 @@ Rails.application.routes.draw do
       post 'contacts/back', to: 'contacts#back', as: 'back'
       get 'done', to: 'contacts#done', as: 'done'
     
-      get :unsubscribe, on: :member
-    patch :withdrawal, on: :member
+    get :unsubscribe, on: :member
 
     resources :signups do
       collection do

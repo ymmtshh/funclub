@@ -59,15 +59,19 @@
   <%= profile.introduction %><br>
 
   活動地域:<br>
-  <%= link_to prefecture_path(@user.profile.prefecture) do %>
-    <%= @user.profile.prefecture.name %><br>
-  <% end %>
+  <% if @user.profile.prefecture.present? %>
+    <%= link_to prefecture_path(@user.profile.prefecture) do %>
+      <%= @user.profile.prefecture.name %><br>
+    <% end %>
+  <% end %><br>
 
 
   ジャンル:<br>
-  <% @user.profile.genres.each do |genre| %>
-    <%= link_to genre_path(genre)  do %>
-      <%= genre.name %>
+  <% if @user.profile.genres.present? %>
+    <% @user.profile.genres.each do |genre| %>
+      <%= link_to genre_path(genre)  do %>
+        <%= genre.name %>
+      <% end %>
     <% end %>
   <% end %><br>
 

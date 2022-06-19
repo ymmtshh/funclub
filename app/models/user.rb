@@ -5,8 +5,11 @@ class User < ApplicationRecord
           :omniauthable, omniauth_providers: %i[twitter google_oauth2],
           authentication_keys: [:login]
 
-  validates :band, inclusion: [true, false]
-  # validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9]+\z/i, message: "ユーザー名は半角英数字です" }
+  validates :band, inclusion: { in: [true, false] }
+  validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9_-]+\z/i, message: "ユーザー名は半角英数字です" }
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
+
 
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
@@ -92,10 +95,8 @@ class User < ApplicationRecord
     end
   end
 
-  # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
     super && confirmed?
-    super && (is_deleted == false)
   end
 
   def inactive_message
@@ -117,7 +118,7 @@ class User < ApplicationRecord
       params.delete(:password)
       params.delete(:password_confirmation)
     end
-    result = update_attributes(params, *options)
+    result = update(params, *options)
     clean_up_passwords
     result
   end
