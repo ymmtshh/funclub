@@ -1,13 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :confirmable, 
-          :recoverable, :rememberable, :validatable, :lockable, :timeoutable, :trackable,
+          :recoverable, :rememberable, :lockable, :timeoutable, :trackable,
           :omniauthable, omniauth_providers: %i[twitter google_oauth2],
           authentication_keys: [:login]
 
   validates :band, inclusion: { in: [true, false] }
   validates :username, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-z0-9_-]+\z/i, message: "ユーザー名は半角英数字です" }
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
 
 

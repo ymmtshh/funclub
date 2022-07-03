@@ -1,4 +1,5 @@
 <%= form_for @profile, url: step2_user_signups_path, method: :get do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
   <%= hidden_field_tag :current_step, 'step1' %>
   <%= f.hidden_field :avatar_cache %>
   <%= f.label "プロフィール画像をアップロード" %><br>

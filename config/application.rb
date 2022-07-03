@@ -27,6 +27,7 @@ module Myapp
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.active_model.i18n_customize_full_message = true  # この行を追加
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

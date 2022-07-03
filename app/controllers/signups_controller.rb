@@ -32,11 +32,11 @@ class SignupsController < ApplicationController
       name: session[:name], # sessionに保存された値をインスタンスに渡す
       introduction: session[:introduction],
       prefecture_id: session[:prefecture_id],
-      web: profile_params[:web],  # step2で入力した値をインスタンスに渡す
-      avatar: profile_params[:avatar],  # step2で入力した値をインスタンスに渡す
+      web: session[:web],  # step2で入力した値をインスタンスに渡す
+      avatar: session[:avatar],  # step2で入力した値をインスタンスに渡す
     )
     @profile.build_social_profile(session[:social_profile_attributes])
-    if @profile.save!
+    if @profile.save
       profile_params[:genre_ids].each do | profileg |
         genres = @profile.genres.pluck(:genre_id)
         unless genres.include?(profileg.to_i)

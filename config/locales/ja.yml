@@ -1,15 +1,40 @@
 ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+      profile: 'プロフィール'
+      prefecture: '地域'
+    attributes:
+      user:
+        username: 'ユーザーネーム'
+      profile:
+        name: '名前'
+        prefecture: '地域'
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              format: '%{message}'
+              blank: 'この%{attribute}は１文字以上入力してください。'
+        profile:
+            name:
+              format: '%{message}'
+              blank: 'この%{attribute}は１文字以上入力してください。'
+            prefecture:
+              format: '%{message}'
+              blank: '%{attribute}を選択してください。'
   enums: 
     user:
       role:
         fan: 'ファン'
         band: 'バンド'
-    
-    contact: # モデル名
-      subject: # カラム名
-        prompt: '---' # enumの値
-        work: 'お仕事の依頼について' # enumの値
-        schedule: 'ライブの詳細について' # enumの値
-        music: '楽曲について' # enumの値
-        goods: 'グッズについて' # enumの値
-        other: 'その他' # enumの値
+  
+  contact: # モデル名
+    subject: # カラム名
+      prompt: '---' # enumの値
+      work: 'お仕事の依頼について' # enumの値
+      schedule: 'ライブの詳細について' # enumの値
+      music: '楽曲について' # enumの値
+      goods: 'グッズについて' # enumの値
+      other: 'その他' # enumの値

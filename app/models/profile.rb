@@ -12,6 +12,9 @@ class Profile < ApplicationRecord
 
   mount_uploader :avatar, ProfileAvatarUploader
 
+  validates :name, presence: true
+  validates :prefecture_id, presence: true
+
   def self.search(search)
     if search
       patterns = search.split(/[ , ]/)

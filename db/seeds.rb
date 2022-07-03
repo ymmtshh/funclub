@@ -19,6 +19,11 @@
 #   City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
 # end
 
+Admin.create!([
+  email: 'ymmtshh18@gmail.com',
+  password: 'Ymmt187194sHH'
+])
+
 Prefecture.create([
   { name: '北海道', slug: 'hokkaido' },
   { name: '青森県', slug: 'aomori' },
