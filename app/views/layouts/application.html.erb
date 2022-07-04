@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-  <html>
+  <html xml:lang="ja" lang="ja">
     <head>
-      <title>Fun Club</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <title>FunClub｜インディーズバンドとファンをつなぐプラットフォーム</title>
       <%= csrf_meta_tags %>
       <%= csp_meta_tag %>
 
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
       <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+      <meta name="description"  content="すべてのアーティストと、すべてのファンを繋ぐ音楽プラットフォーム。" />
+      <meta name="keywords"  content="fanclub,ファンクラブ,ファン" />
+
+      <%= render 'shared/header'%>
     </head>
 
     <body id="<%= controller.controller_name %>-<%= controller.action_name %>">
-      <%= render 'shared/header'%>
       <%= render 'shared/toast'%>
       <%= yield %>
       <%= render 'shared/footer'%>

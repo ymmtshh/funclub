@@ -1,58 +1,54 @@
-<div id="header">
-  <div id="logo">
-    <a href="/">ロゴ</a>
+<header>
+  <div class="nav">
+    <div class="content">
+      <h1 class="logo"><a href="/">ロゴ</a></h1>
+        <div id="nav-toggle">
+          <div>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <nav class="globalnav">
+          <ul>
+            <li id="gn_about"><a href="#">FunClubについて</a></li>
+            <li id="gn_"><a href="#">Customers</a></li>
+            <li id="gn_"><a href="#">Products</a></li> 
+          </ul>
+        </nav>
+
+        <div class="artistSearch">
+          <div class="artistSearchBox">
+            <%= form_with url: search_path, local: true, method: :get do |f| %>
+              <%= f.text_field :search, placeholder: "キーワードで検索", class: "form-control" %>
+            <% end %>
+          </div>
+          <div class="artistSearch_select">
+            <ul class="artistSearch_tabs">>
+              <li><%= link_to "地域から探す", prefectures_path, class: "nav-link px-2 link-dark" %></li>
+              <li><%= link_to "ジャンルから探す", genres_path, class: "nav-link px-2 link-dark" %></li>
+            </ul>
+          </div>
+        </div>
+
+      <div class="header-mypagemenu">
+        <ul>
+          <% if user_signed_in? %>
+            <li><%= link_to "マイページTOP", user_path(current_user) %></li>
+            <% if unchecked_notifications.any? %>
+              <i class="fa fa-circle" style="color: gold;"></i>
+            <% end %>
+            <li><%= link_to "通知", notifications_path %></li>
+            <li><%= link_to "申し込み一覧",  user_reserves_path(current_user) %></li>
+            <li><%= link_to "予約状況",  user_reservations_path(current_user) %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-light"  %></li>
+          <% else %>
+            <li id="gn_signin"><%= link_to "新規登録", new_user_registration_path, class: "btn btn-warning me-2" %></li>
+            <li id="gn_login"><%= link_to "ログイン", new_user_session_path, class: "btn btn-light" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div id="link">
-    <ul id="nav">
-    <% if user_signed_in? %>
-        <li>
-          <%= link_to "マイページ", user_path(current_user) %>
-        </li>
-        
-        <% if unchecked_notifications.any? %>
-            <i class="fa fa-circle" style="color: gold;"></i>
-        <% end %>
-        <li>
-            <%= link_to "通知", notifications_path, class: "btn-default" %>
-        </li>
-
-        <li>
-          <%= link_to "申し込み一覧",  user_reserves_path(current_user) %>
-        </li>
-
-        <li>
-          <%= link_to "予約状況",  user_reservations_path(current_user) %>
-        </li>
-        
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-    <% end %>
-        
-        <li>
-          <%= link_to "一覧", users_path %>
-        </li>
-        
-        <li>
-          <%= link_to "活動地域", prefectures_path %>
-        </li>
-        
-        <li>
-          <%= link_to "ジャンル", genres_path %>
-        </li>
-    </ul>
-
-  <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :search, placeholder: "キーワードで検索", class: "form-control" %>
-      <%= f.submit "検索", class: "btn btn-primary", id: "btnNavbarSearch" %>
-  <% end %>
-  </div>
-</div>
+</header>
