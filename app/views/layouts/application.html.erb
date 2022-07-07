@@ -13,10 +13,10 @@
       <meta name="description"  content="すべてのアーティストと、すべてのファンを繋ぐ音楽プラットフォーム。" />
       <meta name="keywords"  content="fanclub,ファンクラブ,ファン" />
 
-      <%= render 'shared/header'%>
     </head>
 
     <body id="<%= controller.controller_name %>-<%= controller.action_name %>">
+      <%= render 'shared/header'%>
       <%= render 'shared/toast'%>
       <%= yield %>
       <%= render 'shared/footer'%>

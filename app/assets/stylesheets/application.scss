@@ -17,21 +17,79 @@
 
 
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+header {
+  border-bottom: 1px solid #f2f2f2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 8000;
+  background-color: #fff;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc; 
+
+  .content {
+    display: flex;
+  }
+
+  .globalnav {
+    display: flex;
+    vertical-align: middle; 
+    
+    ul {
+      list-style: none;
+      
+      li {
+        display: inline-block;
+        letter-spacing: normal;
+        margin: 0;
+      }
+    }
+  }
+  .artistSearch{
+    display: flex;
+
+    .artistSearchBox{
+
+    }
+
+    .artistSearch_select{
+      ul {
+        list-style: none;
+        
+        li {
+          display: inline-block;
+          letter-spacing: normal;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .header-mypagemenu{
+    ul {
+      list-style: none;
+      
+      li {
+        display: inline-block;
+        letter-spacing: normal;
+        margin: 0;
+      }
+    }
+  }
 }
 
-// .header .nav {
+
+
+
+// header .nav {
 //   display: flex;
 //   list-style: none;
 //   /* background-color:rgb(129, 25, 25) */
 // }
 
-// .header .nav .content {
-//   width: 100px;
-//   height: 50px;
+// header .nav .content {
+//   // width: 100px;
+//   // height: 50px;
 //   text-align: center;
 //   background-color: #333;
 //   line-height: 50px;
